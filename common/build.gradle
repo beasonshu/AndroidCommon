@@ -17,6 +17,8 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+// 添加插件
+apply plugin: 'com.novoda.bintray-release'
 
 repositories {
     google()
@@ -86,6 +88,17 @@ ext {
     } catch (Exception e) {
         ANDROID_SUPPORT_VERSION = ANDROID_SUPPORT_VERSION_COMMON
     }
+}
+
+//添加
+publish {
+    repoName = 'work'//bintray.com用户名
+    userOrg = 'brightyu'//bintray.com用户名
+    groupId = 'com.ishow.common'//jcenter上的路径
+    artifactId = 'xx'//项目名称
+    publishVersion = PROD_VERSION_NAME//版本号
+    desc = '新橙分期'
+    website = 'https://github.com/i-show/AndroidCommon'
 }
 
 dependencies {
