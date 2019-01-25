@@ -19,6 +19,7 @@ package com.ishow.common.utils;
 import android.util.Base64;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -30,23 +31,34 @@ public class EncryptUtils {
     /**
      * 32位 MD5加密
      */
-    public static String md5(long vlaueL) {
-        String vlaue = String.valueOf(vlaueL);
-        return md5(vlaue);
+    public static String md5(long valueL) {
+        String value = String.valueOf(valueL);
+        return md5(value);
     }
 
     /**
      * 32位 MD5加密
      */
     @SuppressWarnings("WeakerAccess")
-    public static String md5(String string) {
+    public static String md5(String value) {
+        return md5(value, true);
+    }
+
+
+    /**
+     * 32位 MD5加密
+     */
+    @SuppressWarnings("WeakerAccess")
+    public static String md5(String value, boolean is32) {
+        if (value == null) {
+            value = StringUtils.EMPTY;
+        }
+
         byte[] hash;
         try {
-            hash = MessageDigest.getInstance("MD5").digest(string.getBytes("UTF-8"));
+            hash = MessageDigest.getInstance("MD5").digest(value.getBytes(StandardCharsets.UTF_8));
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException("Huh, MD5 should be supported?", e);
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException("Huh, UTF-8 should be supported?", e);
         }
 
         StringBuilder hex = new StringBuilder(hash.length * 2);
@@ -54,7 +66,7 @@ public class EncryptUtils {
             if ((b & 0xFF) < 0x10) hex.append("0");
             hex.append(Integer.toHexString(b & 0xFF));
         }
-        return hex.toString();
+        return is32 ? hex.toString() : hex.substring(8, 24);
     }
 
 
