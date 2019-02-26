@@ -15,17 +15,22 @@
   -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <com.ishow.common.widget.TopBar
         android:id="@+id/top_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:leftImage="@drawable/ic_back_white"
-        app:text="@string/sample_permission"/>
+        app:text="@string/sample_permission" />
+
+    <View
+        android:layout_width="15dp"
+        android:layout_height="5dp"
+        android:background="#FF00" />
 
     <com.ishow.common.widget.edittext.EditTextPro
         android:id="@+id/text"
@@ -33,17 +38,26 @@
         android:layout_height="wrap_content"
         app:editable="false"
         app:leftImage="@drawable/ic_account"
-        app:leftText="@string/forgot_password_tip_password"/>
+        app:leftText="@string/forgot_password_tip_password" />
 
 
     <com.ishow.common.widget.edittext.EditTextPro
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:inputType="textPassword"
         app:leftImage="@drawable/ic_account"
         app:leftText="@string/forgot_password_tip_password"
-        app:rightImageVisibility="gone"/>
+        app:leftTextMarginEnd="15dp"
+        app:rightImage="@drawable/ic_password_visibility"
+        app:rightImageAction="setPasswordVisibility"
+        app:rightImageBackground="@color/blue_50"
+        app:rightImageHeight="20dp"
+        app:rightImageMarginEnd="15dp"
+        app:rightImageMarginStart="15dp"
+        app:rightImageVisibility="visible" />
 
     <com.ishow.common.widget.edittext.EditTextPro
+        android:id="@+id/test1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
@@ -51,6 +65,7 @@
         app:leftImage="@drawable/ic_account"
         app:leftText="@string/forgot_password_tip_password"
         app:rightText="提示"
-        app:rightTextVisibility="visible"/>
+        app:rightTextVisibility="visible" />
+
 
 </LinearLayout>

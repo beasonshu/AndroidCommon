@@ -48,6 +48,7 @@ import android.widget.ImageView;
 
 import com.ishow.common.R;
 import com.ishow.common.utils.StringUtils;
+import com.ishow.common.utils.UnitUtils;
 import com.ishow.common.widget.imageview.PromptImageView;
 import com.ishow.common.widget.prompt.IPrompt;
 import com.ishow.common.widget.textview.PromptTextView;
@@ -83,8 +84,11 @@ public class EditTextPro extends ViewGroup implements View.OnFocusChangeListener
      */
     private Drawable mLeftImageDrawable;
     private Drawable mLeftImageBackgroundDrawable;
+    private int mLeftImageWidth;
+    private int mLeftImageHeight;
     private int mLeftImageVisibility;
-    private int mLeftImageRightMargin;
+    private int mLeftImageMarginStart;
+    private int mLeftImageMarginEnd;
     /**
      * 左侧文本信息
      */
@@ -94,7 +98,8 @@ public class EditTextPro extends ViewGroup implements View.OnFocusChangeListener
     private int mLeftTextVisibility;
     private int mLeftTextMinWidth;
     private int mLeftTextMaxWidth;
-    private int mLeftTextRightMargin;
+    private int mLeftTextMarginStart;
+    private int mLeftTextMarginEnd;
     private int mLeftTextGravity;
     private int mLeftTextStyle;
     private Drawable mLeftTextBackgroundDrawable;
@@ -109,7 +114,8 @@ public class EditTextPro extends ViewGroup implements View.OnFocusChangeListener
     private int mInputHintTextColor;
     private int mInputLines;
     private int mInputMaxLength;
-    private int mInputRightMargin;
+    private int mInputMarginStart;
+    private int mInputMarginEnd;
     private int mInputType;
     private String mInputTextString;
     private String mInputHintString;
@@ -124,7 +130,8 @@ public class EditTextPro extends ViewGroup implements View.OnFocusChangeListener
     private int mRightTextSize;
     private int mRightTextColor;
     private int mRightTextVisibility;
-    private int mRightTextRightMargin;
+    private int mRightTextMarginStart;
+    private int mRightTextMarginEnd;
     private int mRightTextMinWidth;
     private int mRightTextMaxWidth;
     private int mRightTextGravity;
@@ -136,7 +143,13 @@ public class EditTextPro extends ViewGroup implements View.OnFocusChangeListener
      */
     private Drawable mRightImageDrawable;
     private Drawable mRightImageBackgroundDrawable;
+    private int mRightImageWidth;
+    private int mRightImageHeight;
+    private int mRightImageMarginStart;
+    private int mRightImageMarginEnd;
     private int mRightImageVisibility;
+    private int mRightImageAction;
+
     /**
      * 顶部的线
      */
@@ -194,14 +207,18 @@ public class EditTextPro extends ViewGroup implements View.OnFocusChangeListener
         mTintColor = a.getColorStateList(R.styleable.EditTextPro_tintColor);
 
         mLeftImageDrawable = a.getDrawable(R.styleable.EditTextPro_leftImage);
+        mLeftImageWidth = a.getDimensionPixelSize(R.styleable.EditTextPro_leftImageWidth, -1);
+        mLeftImageHeight = a.getDimensionPixelSize(R.styleable.EditTextPro_leftImageHeight, -1);
         mLeftImageBackgroundDrawable = a.getDrawable(R.styleable.EditTextPro_leftImageBackground);
+        mLeftImageMarginStart = a.getDimensionPixelSize(R.styleable.EditTextPro_leftImageMarginStart, 0);
+        mLeftImageMarginEnd = a.getDimensionPixelSize(R.styleable.EditTextPro_leftImageMarginEnd, 0);
         mLeftImageVisibility = a.getInt(R.styleable.EditTextPro_leftImageVisibility, View.VISIBLE);
-        mLeftImageRightMargin = a.getDimensionPixelSize(R.styleable.EditTextPro_leftImageRightMargin, 0);
 
         mLeftTextString = a.getString(R.styleable.EditTextPro_leftText);
         mLeftTextSize = a.getDimensionPixelSize(R.styleable.EditTextPro_leftTextSize, getDefaultTipTextSize());
         mLeftTextColor = a.getColor(R.styleable.EditTextPro_leftTextColor, getDefaultTipTextColor());
-        mLeftTextRightMargin = a.getDimensionPixelSize(R.styleable.EditTextPro_leftTextRightMargin, 0);
+        mLeftTextMarginStart = a.getDimensionPixelSize(R.styleable.EditTextPro_leftTextMarginStart, 0);
+        mLeftTextMarginEnd = a.getDimensionPixelSize(R.styleable.EditTextPro_leftTextMarginEnd, 0);
         mLeftTextMinWidth = a.getDimensionPixelSize(R.styleable.EditTextPro_leftTextMinWidth, getDefaultTipMinWidth());
         mLeftTextMaxWidth = a.getDimensionPixelSize(R.styleable.EditTextPro_leftTextMaxWidth, getDefaultTipMaxWidth());
         mLeftTextVisibility = a.getInt(R.styleable.EditTextPro_leftTextVisibility, View.VISIBLE);
@@ -209,25 +226,27 @@ public class EditTextPro extends ViewGroup implements View.OnFocusChangeListener
         mLeftTextBackgroundDrawable = a.getDrawable(R.styleable.EditTextPro_leftTextBackground);
         mLeftTextStyle = a.getInt(R.styleable.EditTextPro_leftTextStyle, 0);
 
+        mInputTextString = a.getString(R.styleable.EditTextPro_inputText);
+        mInputTextSize = a.getDimensionPixelSize(R.styleable.EditTextPro_inputTextSize, getDefaultInputTextSize());
+        mInputTextColor = a.getColor(R.styleable.EditTextPro_inputTextColor, getDefaultInputTextColor());
         mInputBackgroundDrawable = a.getDrawable(R.styleable.EditTextPro_inputBackground);
         mInputGravity = a.getInt(R.styleable.EditTextPro_inputGravity, Gravity.CENTER_VERTICAL);
-        mInputTextSize = a.getDimensionPixelSize(R.styleable.EditTextPro_inputTextSize, getDefaultInputTextSize());
-        mInputRightMargin = a.getDimensionPixelSize(R.styleable.EditTextPro_inputRightMargin, 0);
-        mInputTextColor = a.getColor(R.styleable.EditTextPro_inputTextColor, getDefaultInputTextColor());
+        mInputDigitsString = a.getString(R.styleable.EditTextPro_inputDigits);
+        mInputMarginStart = a.getDimensionPixelSize(R.styleable.EditTextPro_inputMarginStart, 0);
+        mInputMarginEnd = a.getDimensionPixelSize(R.styleable.EditTextPro_inputMarginEnd, 0);
+        mInputHintString = a.getString(R.styleable.EditTextPro_inputHint);
         mInputHintTextColor = a.getColor(R.styleable.EditTextPro_inputHintTextColor, getDefaultInputHintTextColor());
         mInputLines = a.getInt(R.styleable.EditTextPro_inputLines, 0);
         mInputMaxLength = a.getInt(R.styleable.EditTextPro_inputTextMaxLength, 0);
-        mInputTextString = a.getString(R.styleable.EditTextPro_inputText);
-        mInputHintString = a.getString(R.styleable.EditTextPro_inputHint);
         mInputType = a.getInt(R.styleable.EditTextPro_inputType, InputType.TYPE_TEXT_FLAG_MULTI_LINE);
-        mInputDigitsString = a.getString(R.styleable.EditTextPro_inputDigits);
         isCancelEnable = a.getBoolean(R.styleable.EditTextPro_cancelEnable, true);
 
         mRightTextString = a.getString(R.styleable.EditTextPro_rightText);
         mRightTextSize = a.getDimensionPixelSize(R.styleable.EditTextPro_rightTextSize, getDefaultTipTextSize());
         mRightTextColor = a.getColor(R.styleable.EditTextPro_rightTextColor, getDefaultTipTextColor());
         mRightTextVisibility = a.getInt(R.styleable.EditTextPro_rightTextVisibility, View.GONE);
-        mRightTextRightMargin = a.getDimensionPixelSize(R.styleable.EditTextPro_rightTextRightMargin, 0);
+        mRightTextMarginStart = a.getDimensionPixelSize(R.styleable.EditTextPro_rightTextMarginStart, 0);
+        mRightTextMarginEnd = a.getDimensionPixelSize(R.styleable.EditTextPro_rightTextMarginEnd, 0);
         mRightTextPadding = a.getDimensionPixelSize(R.styleable.EditTextPro_rightTextPadding, 0);
         mRightTextMinWidth = a.getDimensionPixelSize(R.styleable.EditTextPro_rightTextMinWidth, getDefaultTipMinWidth());
         mRightTextMaxWidth = a.getDimensionPixelSize(R.styleable.EditTextPro_rightTextMaxWidth, getDefaultTipMaxWidth());
@@ -236,8 +255,13 @@ public class EditTextPro extends ViewGroup implements View.OnFocusChangeListener
         mRightTextBackgroundDrawable = a.getDrawable(R.styleable.EditTextPro_rightTextBackground);
 
         mRightImageDrawable = a.getDrawable(R.styleable.EditTextPro_rightImage);
+        mRightImageWidth = a.getDimensionPixelSize(R.styleable.EditTextPro_rightImageWidth, 0);
+        mRightImageHeight = a.getDimensionPixelSize(R.styleable.EditTextPro_rightImageHeight, 0);
         mRightImageBackgroundDrawable = a.getDrawable(R.styleable.EditTextPro_rightImageBackground);
         mRightImageVisibility = a.getInt(R.styleable.EditTextPro_rightImageVisibility, View.VISIBLE);
+        mRightImageMarginStart = a.getDimensionPixelSize(R.styleable.EditTextPro_rightImageMarginStart, 0);
+        mRightImageMarginEnd = a.getDimensionPixelSize(R.styleable.EditTextPro_rightImageMarginEnd, 0);
+        mRightImageAction = a.getInt(R.styleable.EditTextPro_rightImageAction, RightImageAction.NONE);
 
         mTopLineHeight = a.getDimensionPixelSize(R.styleable.EditTextPro_topLineHeight, getDefaultLineHeight());
         mTopLineNormalColor = a.getColor(R.styleable.EditTextPro_topLineNormalColor, getDefaultNormalLineColor());
@@ -276,8 +300,8 @@ public class EditTextPro extends ViewGroup implements View.OnFocusChangeListener
             mCancelVisibility = VISIBLE;
         }
 
-        mSuggestIconWidth = getContext().getResources().getDimensionPixelSize(R.dimen.dp_40);
-        mSuggestCancelWidth = getContext().getResources().getDimensionPixelSize(R.dimen.dp_30);
+        mSuggestIconWidth = UnitUtils.dip2px(40);
+        mSuggestCancelWidth = UnitUtils.dip2px(30);
 
         mTopLinePaint = new Paint();
         mTopLinePaint.setDither(true);
@@ -325,23 +349,39 @@ public class EditTextPro extends ViewGroup implements View.OnFocusChangeListener
         int inputWidth = width - getPaddingLeft() - getPaddingRight();
 
         if (mLeftImageView != null && mLeftImageView.getVisibility() != View.GONE) {
-            mLeftImageView.measure(imageWidthSpec, heightSpec);
-            inputWidth = inputWidth - mLeftImageView.getMeasuredWidth() - mLeftImageRightMargin;
+            if (mLeftImageWidth > 0 && mLeftImageHeight > 0) {
+                mLeftImageView.measure(getExactlyMeasureSpec(mLeftImageWidth), getExactlyMeasureSpec(mLeftImageHeight));
+            } else if (mLeftImageWidth > 0) {
+                mLeftImageView.measure(getExactlyMeasureSpec(mLeftImageWidth), heightSpec);
+            } else if (mLeftImageHeight > 0) {
+                mLeftImageView.measure(imageWidthSpec, getExactlyMeasureSpec(mLeftImageHeight));
+            } else {
+                mLeftImageView.measure(imageWidthSpec, heightSpec);
+            }
+            inputWidth = inputWidth - mLeftImageView.getMeasuredWidth() - mLeftImageMarginStart - mLeftImageMarginEnd;
         }
 
         if (mLeftTextView != null && mLeftTextView.getVisibility() != View.GONE) {
             mLeftTextView.measure(unspecified, heightSpec);
-            inputWidth = inputWidth - mLeftTextView.getMeasuredWidth() - mLeftTextRightMargin;
+            inputWidth = inputWidth - mLeftTextView.getMeasuredWidth() - mLeftTextMarginStart - mLeftTextMarginEnd;
         }
 
         if (mRightImageView != null && mRightImageView.getVisibility() != View.GONE) {
-            mRightImageView.measure(imageWidthSpec, heightSpec);
-            inputWidth = inputWidth - mRightImageView.getMeasuredWidth();
+            if (mRightImageWidth > 0 && mRightImageHeight > 0) {
+                mRightImageView.measure(getExactlyMeasureSpec(mRightImageWidth), getExactlyMeasureSpec(mRightImageHeight));
+            } else if (mRightImageWidth > 0) {
+                mRightImageView.measure(getExactlyMeasureSpec(mRightImageWidth), heightSpec);
+            } else if (mRightImageHeight > 0) {
+                mRightImageView.measure(imageWidthSpec, getExactlyMeasureSpec(mRightImageHeight));
+            } else {
+                mRightImageView.measure(imageWidthSpec, heightSpec);
+            }
+            inputWidth = inputWidth - mRightImageView.getMeasuredWidth() - mRightImageMarginStart - mRightImageMarginEnd;
         }
 
         if (mRightTextView != null && mRightTextView.getVisibility() != View.GONE) {
             mRightTextView.measure(unspecified, unspecified);
-            inputWidth = inputWidth - mRightTextView.getMeasuredWidth() - mRightTextRightMargin;
+            inputWidth = inputWidth - mRightTextView.getMeasuredWidth() - mRightTextMarginStart - mRightTextMarginEnd;
         }
 
         if (mCustomizeView != null && mCustomizeView.getVisibility() != View.GONE) {
@@ -352,7 +392,7 @@ public class EditTextPro extends ViewGroup implements View.OnFocusChangeListener
         if (mCancelView != null && mCancelView.getVisibility() != View.GONE) {
             inputWidth = inputWidth - mSuggestCancelWidth;
         }
-        inputWidth = inputWidth - mInputRightMargin;
+        inputWidth = inputWidth - mInputMarginStart - mInputMarginEnd;
         mInputView.measure(MeasureSpec.makeMeasureSpec(inputWidth, MeasureSpec.EXACTLY), heightSpec);
 
         height = height + getPaddingTop() + getPaddingBottom();
@@ -386,7 +426,7 @@ public class EditTextPro extends ViewGroup implements View.OnFocusChangeListener
                 int inputWidth = width - paddingStart - paddingEnd;
 
                 if (mLeftImageView != null && mLeftImageView.getVisibility() != View.GONE) {
-                    inputWidth = inputWidth - mSuggestIconWidth - mLeftImageRightMargin;
+                    inputWidth = inputWidth - mSuggestIconWidth - mLeftImageMarginStart - mLeftImageMarginEnd;
                 }
 
                 if (mLeftTextView != null && mLeftTextView.getVisibility() != View.GONE) {
@@ -394,7 +434,7 @@ public class EditTextPro extends ViewGroup implements View.OnFocusChangeListener
                     mLeftTextView.measure(unspecified, unspecified);
                     final int leftTextHeight = mLeftTextView.getMeasuredHeight();
                     final int leftTextWidth = mLeftTextView.getMeasuredWidth();
-                    inputWidth = inputWidth - leftTextWidth - mLeftTextRightMargin;
+                    inputWidth = inputWidth - leftTextWidth - mLeftTextMarginStart - mLeftTextMarginEnd;
                     height = Math.max(height, leftTextHeight);
                 }
 
@@ -403,18 +443,22 @@ public class EditTextPro extends ViewGroup implements View.OnFocusChangeListener
                     mRightTextView.measure(unspecified, unspecified);
                     final int rightTextHeight = mRightTextView.getMeasuredHeight();
                     final int rightTextWidth = mRightTextView.getMeasuredWidth();
-                    inputWidth = inputWidth - rightTextWidth - mRightTextRightMargin;
+                    inputWidth = inputWidth - rightTextWidth - mRightTextMarginStart - mRightTextMarginEnd;
                     height = Math.max(height, rightTextHeight);
                 }
 
                 if (mRightImageView != null && mRightImageView.getVisibility() != View.GONE) {
-                    inputWidth = inputWidth - mSuggestIconWidth;
+                    if (mRightImageWidth > 0) {
+                        inputWidth = inputWidth - mRightImageWidth - mRightImageMarginStart - mRightImageMarginEnd;
+                    } else {
+                        inputWidth = inputWidth - mSuggestIconWidth - mRightImageMarginStart - mRightImageMarginEnd;
+                    }
                 }
 
                 if (mCancelView != null && mCancelView.getVisibility() != View.GONE) {
                     inputWidth = inputWidth - mSuggestCancelWidth;
                 }
-                inputWidth = inputWidth - mInputRightMargin;
+                inputWidth = inputWidth - mInputMarginStart - mInputMarginEnd;
 
                 final int widthSpec = MeasureSpec.makeMeasureSpec(inputWidth, MeasureSpec.EXACTLY);
                 final int heightSpec = MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED);
@@ -433,24 +477,37 @@ public class EditTextPro extends ViewGroup implements View.OnFocusChangeListener
         int right = r - l - getPaddingEnd();
         int bottom = b - t - getPaddingBottom();
         int index = 0;
+        int lastLeft = left;
         left = layoutCustomize(left, index);
-        if (mLeftImageView != null && mLeftImageView.getVisibility() != View.GONE) {
-            int height = mLeftImageView.getMeasuredHeight();
-            int height2 = getMeasuredHeight();
+        index = lastLeft == left ? index : index + 1;
 
-            mLeftImageView.layout(left, top, left + mSuggestIconWidth, bottom);
-            left = left + mSuggestIconWidth + mLeftImageRightMargin;
+        if (mLeftImageView != null && mLeftImageView.getVisibility() != View.GONE) {
+            int width = mLeftImageView.getMeasuredWidth();
+            int height = mLeftImageView.getMeasuredHeight();
+            int _top = (getMeasuredHeight() - height) / 2;
+            left = left + mLeftImageMarginStart;
+            mLeftImageView.layout(left, _top, left + width, _top + height);
+            left = left + width + mLeftImageMarginEnd;
             index++;
         }
+
+        lastLeft = left;
         left = layoutCustomize(left, index);
+        index = lastLeft == left ? index : index + 1;
+
         if (mLeftTextView != null && mLeftTextView.getVisibility() != View.GONE) {
             int width = mLeftTextView.getMeasuredWidth();
+            left = left + mLeftTextMarginStart;
             mLeftTextView.layout(left, top, left + width, bottom);
-            left = left + width + mLeftTextRightMargin;
+            left = left + width + mLeftTextMarginEnd;
             index++;
         }
-        left = layoutCustomize(left, index);
 
+        lastLeft = left;
+        left = layoutCustomize(left, index);
+        index = lastLeft == left ? index : index + 1;
+
+        left = left + mInputMarginStart;
         int inputWidth = mInputView.getMeasuredWidth();
         int inputHeight = mInputView.getMeasuredHeight();
         mInputView.layout(left, top, left + inputWidth, bottom);
@@ -460,21 +517,31 @@ public class EditTextPro extends ViewGroup implements View.OnFocusChangeListener
             mCancelView.layout(left, top, left + mSuggestCancelWidth, bottom);
             left = left + mSuggestCancelWidth;
         }
-        left = left + mInputRightMargin;
+        left = left + mInputMarginEnd;
         index++;
+
+        lastLeft = left;
         left = layoutCustomize(left, index);
+        index = lastLeft == left ? index : index + 1;
 
         if (mRightTextView != null && mRightTextView.getVisibility() != View.GONE) {
             int width = mRightTextView.getMeasuredWidth();
             int height = mRightTextView.getMeasuredHeight();
             int _top = (getMeasuredHeight() - height) / 2;
+            left = left + mRightTextMarginStart;
             mRightTextView.layout(left, _top, left + width, _top + height);
-            left = left + width + mRightTextRightMargin;
+            left = left + width + mRightTextMarginEnd;
             index++;
         }
+        // 倒数第二个不需要处理index信息
         left = layoutCustomize(left, index);
+
         if (mRightImageView != null && mRightImageView.getVisibility() != View.GONE) {
-            mRightImageView.layout(left, top, right, bottom);
+            int width = mRightImageView.getMeasuredWidth();
+            int height = mRightImageView.getMeasuredHeight();
+            int _top = (getMeasuredHeight() - height) / 2;
+            left = left + mRightImageMarginStart;
+            mRightImageView.layout(left, _top, left + width, _top + height);
         }
         index = -1;
         layoutCustomize(left, index);
@@ -508,6 +575,8 @@ public class EditTextPro extends ViewGroup implements View.OnFocusChangeListener
         final int id = v.getId();
         if (id == R.id.cancel) {
             cancel();
+        } else if (id == R.id.rightImage) {
+            updatePasswordVisibility(v);
         }
     }
 
@@ -586,7 +655,7 @@ public class EditTextPro extends ViewGroup implements View.OnFocusChangeListener
 
 
     @SuppressWarnings("UnusedReturnValue")
-    private EditText getInputView() {
+    public EditText getInputView() {
         if (mInputView == null) {
             mInputView = new AppCompatEditText(getContext());
             mInputView.setPadding(0, 0, 0, 0);
@@ -596,7 +665,6 @@ public class EditTextPro extends ViewGroup implements View.OnFocusChangeListener
             mInputView.setTextColor(mInputTextColor);
             mInputView.setHintTextColor(mInputHintTextColor);
             mInputView.setOnFocusChangeListener(this);
-
             mInputView.setInputType(mInputType);
 
 
@@ -679,7 +747,6 @@ public class EditTextPro extends ViewGroup implements View.OnFocusChangeListener
         }
 
         if (mRightImageView == null) {
-
             if (mTintColor != null && mRightImageDrawable != null) {
                 mRightImageDrawable = DrawableCompat.wrap(mRightImageDrawable);
                 DrawableCompat.setTintList(mRightImageDrawable, mTintColor);
@@ -692,14 +759,38 @@ public class EditTextPro extends ViewGroup implements View.OnFocusChangeListener
                 mRightImageView.setImageResource(R.drawable.ic_arrow_right);
             } else {
                 mRightImageView.setImageDrawable(mRightImageDrawable);
-
             }
             mRightImageView.setBackground(mRightImageBackgroundDrawable);
             mRightImageView.setScaleType(ImageView.ScaleType.CENTER);
+
+            // 设置点击事件
+            if (mRightImageAction == RightImageAction.SET_PASSWORD_VISIBILITY) {
+                mRightImageView.setOnClickListener(this);
+            }
+
             setDefaultPromptState(mRightImageView);
             addView(mRightImageView);
         }
         return mRightImageView;
+    }
+
+    /**
+     * 更新密码是否可见
+     */
+    private void updatePasswordVisibility(View v) {
+        int type = mInputView.getInputType();
+        if (type == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) {
+            mInputView.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD | InputType.TYPE_CLASS_TEXT);
+            v.setSelected(false);
+        } else {
+            mInputView.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            v.setSelected(true);
+        }
+
+        Editable editable = mInputView.getText();
+        if (editable != null) {
+            mInputView.setSelection(editable.length());
+        }
     }
 
     private void setDefaultPromptState(IPrompt prompt) {
@@ -718,11 +809,11 @@ public class EditTextPro extends ViewGroup implements View.OnFocusChangeListener
     }
 
     private int getDefaultTipMinWidth() {
-        return getContext().getResources().getDimensionPixelSize(R.dimen.dp_50);
+        return UnitUtils.dip2px(50);
     }
 
     private int getDefaultTipMaxWidth() {
-        return getContext().getResources().getDimensionPixelSize(R.dimen.dp_120);
+        return UnitUtils.dip2px(120);
     }
 
     @SuppressWarnings("deprecation")
@@ -731,7 +822,7 @@ public class EditTextPro extends ViewGroup implements View.OnFocusChangeListener
     }
 
     private int getDefaultInputTextSize() {
-        return getContext().getResources().getDimensionPixelSize(R.dimen.H_title);
+        return getContext().getResources().getDimensionPixelSize(R.dimen.I_title);
     }
 
     @SuppressWarnings("deprecation")
@@ -993,5 +1084,22 @@ public class EditTextPro extends ViewGroup implements View.OnFocusChangeListener
         }
     }
 
+    /**
+     * 获取精确的MeasureSpec
+     */
+    private int getExactlyMeasureSpec(int size) {
+        return MeasureSpec.makeMeasureSpec(size, MeasureSpec.EXACTLY);
+    }
 
+
+    public static final class RightImageAction {
+        /**
+         * 没有任何操作
+         */
+        public final static int NONE = 0;
+        /**
+         * 设置密码是否可见
+         */
+        public final static int SET_PASSWORD_VISIBILITY = 4;
+    }
 }
