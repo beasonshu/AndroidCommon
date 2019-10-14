@@ -19,6 +19,7 @@ package com.ishow.common.widget.loading;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.KeyEvent;
@@ -70,7 +71,21 @@ public class LoadingDialog extends Dialog {
         if (dialog == null) {
             return;
         }
-        dialog.dismiss();
+        if(dialog.isShowing()) { //check if dialog is showing.
+            //get the Context object that was used to great the dialog
+            Context context = ((ContextWrapper)dialog.getContext()).getBaseContext();
+
+            //if the Context used here was an activity AND it hasn't been finished or destroyed
+            //then dismiss it
+            if(context instanceof Activity) {
+                if(!((Activity)context).isFinishing() && !((Activity)context).isDestroyed())
+                    dialog.dismiss();
+            } else{
+                //if the Context used wasnt an Activity, then dismiss it too
+                dialog.dismiss();
+            }
+        }
+
     }
 
     @Override
