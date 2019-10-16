@@ -20,13 +20,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.ishow.common.widget.TopBar
+    <tk.beason.common.widget.TopBar
         android:id="@+id/top_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:text="@string/sample_select_photo" />
 
-    <com.ishow.common.widget.flowlayout.FlowLayout
+    <tk.beason.common.widget.flowlayout.FlowLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:flowMode="wrap">
@@ -50,9 +50,9 @@
             style="@style/AppTextView.Sample"
             android:text="@string/sample_select_photo_mult" />
 
-    </com.ishow.common.widget.flowlayout.FlowLayout>
+    </tk.beason.common.widget.flowlayout.FlowLayout>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.appcompat.widget.RecyclerView
         android:id="@+id/photo_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

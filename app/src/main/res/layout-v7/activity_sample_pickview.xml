@@ -6,7 +6,7 @@
 
               android:orientation="vertical">
 
-    <com.ishow.common.widget.TopBar
+    <tk.beason.common.widget.TopBar
         android:id="@+id/top_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,7 +22,7 @@
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <com.ishow.common.widget.pickview.PickerView
+            <tk.beason.common.widget.pickview.PickerView
                 android:id="@+id/picker_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -31,7 +31,7 @@
                 android:paddingStart="@dimen/gap_grade_5"/>
 
 
-            <com.ishow.common.widget.pickview.DateTimePicker
+            <tk.beason.common.widget.pickview.DateTimePicker
                 android:id="@+id/datePicker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -46,13 +46,13 @@
                 android:text="@string/sample_get_time"/>
 
 
-            <com.ishow.common.widget.pickview.DateTimePicker
+            <tk.beason.common.widget.pickview.DateTimePicker
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/gap_grade_3"
                 app:datePickerStyle="date"/>
 
-            <com.ishow.common.widget.pickview.DateTimePicker
+            <tk.beason.common.widget.pickview.DateTimePicker
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/gap_grade_3"

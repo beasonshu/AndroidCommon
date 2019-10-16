@@ -35,7 +35,7 @@
 
     </LinearLayout>
 
-    <com.ishow.common.widget.textview.TextViewPro
+    <tk.beason.common.widget.textview.TextViewPro
         android:id="@+id/settings"
         style="@style/TextViewPro.Mine"
         app:leftText="@string/settings"

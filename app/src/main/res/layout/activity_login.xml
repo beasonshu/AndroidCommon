@@ -29,7 +29,7 @@
         android:layout_height="110dp" />
 
 
-    <com.ishow.common.widget.tablayout.TabLayoutPro
+    <tk.beason.common.widget.tablayout.TabLayoutPro
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,21 +41,21 @@
         app:tabTextSize="@dimen/I_title" />
 
 
-    <com.ishow.common.widget.edittext.EditTextPro
+    <tk.beason.common.widget.edittext.EditTextPro
         android:id="@+id/account"
         style="@style/EditTextPro.Account.Login"
         app:inputHint="@string/login_hint_account"
         app:leftText="@string/login_account_tip" />
 
 
-    <com.ishow.common.widget.edittext.EditTextPro
+    <tk.beason.common.widget.edittext.EditTextPro
         android:id="@+id/password"
         style="@style/EditTextPro.Account.Login"
         app:inputHint="@string/login_hint_password"
         app:inputType="textPassword"
         app:leftText="@string/login_password_tip" />
 
-    <com.ishow.common.widget.edittext.EditTextPro
+    <tk.beason.common.widget.edittext.EditTextPro
         android:id="@+id/verifyCode"
         style="@style/EditTextPro.Account.Login"
         android:visibility="gone"
@@ -66,10 +66,10 @@
         app:inputType="number"
         app:leftText="@string/register_tip_verify_code">
 
-        <com.ishow.common.widget.VerifyCodeButton
+        <tk.beason.common.widget.VerifyCodeButton
             android:id="@+id/sendVerifyCode"
             style="@style/VerifyCodeButton" />
-    </com.ishow.common.widget.edittext.EditTextPro>
+    </tk.beason.common.widget.edittext.EditTextPro>
 
     <Button
         android:id="@+id/login"

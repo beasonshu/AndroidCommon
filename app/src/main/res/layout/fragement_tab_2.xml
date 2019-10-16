@@ -6,7 +6,7 @@
               android:background="@color/windows_background"
               android:orientation="vertical">
 
-    <com.ishow.common.widget.StatusView
+    <tk.beason.common.widget.StatusView
         android:id="@+id/status_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

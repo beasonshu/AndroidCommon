@@ -21,7 +21,7 @@
               android:background="@drawable/no_line_bg"
               android:orientation="vertical">
 
-    <com.ishow.common.widget.imageview.ScaleImageView
+    <tk.beason.common.widget.imageview.ScaleImageView
         android:id="@+id/photo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

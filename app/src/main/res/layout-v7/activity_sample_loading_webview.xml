@@ -21,13 +21,13 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <com.ishow.common.widget.TopBar
+    <tk.beason.common.widget.TopBar
         android:id="@+id/top_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:text="@string/sample_loading_webview"/>
 
-    <com.ishow.common.widget.webview.loading.LoadingWebView
+    <tk.beason.common.widget.webview.loading.LoadingWebView
         android:id="@+id/web_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

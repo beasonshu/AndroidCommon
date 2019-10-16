@@ -33,7 +33,7 @@
         android:background="@drawable/corner_5dp_normal"
         android:gravity="center">
 
-        <com.ishow.common.widget.spinkit.SpinKitView
+        <tk.beason.common.widget.spinkit.SpinKitView
             android:id="@+id/photo"
             style="@style/SpinKitView.Wave"
             android:layout_width="@dimen/dp_48"

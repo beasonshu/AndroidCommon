@@ -23,7 +23,7 @@
               android:orientation="vertical">
 
 
-    <com.ishow.common.widget.TopBar
+    <tk.beason.common.widget.TopBar
         android:id="@+id/top_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
         app:rightText="@string/yes"
         app:rightTextMinWidth="@dimen/dp_80"/>
 
-    <com.ishow.common.widget.pickview.PickerView
+    <tk.beason.common.widget.pickview.PickerView
         android:id="@+id/picker"
         android:layout_width="@dimen/dp_200"
         android:layout_height="wrap_content"

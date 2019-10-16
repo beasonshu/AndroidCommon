@@ -21,14 +21,14 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <com.ishow.common.widget.TopBar
+    <tk.beason.common.widget.TopBar
         android:id="@+id/top_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:text="@string/sample_flow_layout"/>
 
 
-    <com.ishow.common.widget.flowlayout.FlowLayout
+    <tk.beason.common.widget.flowlayout.FlowLayout
         android:id="@+id/flow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

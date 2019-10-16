@@ -25,6 +25,7 @@ import android.view.View
 import com.ishow.pulltorefresh.IPullToRefreshUtils
 import com.ishow.pulltorefresh.OnPullToRefreshListener
 import com.ishow.pulltorefresh.PullToRefreshView
+import tk.beason.noah.modules.base.AppBaseFragment
 
 
 /**

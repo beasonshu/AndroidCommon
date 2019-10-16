@@ -21,13 +21,13 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <com.ishow.common.widget.TopBar
+    <tk.beason.common.widget.TopBar
         android:id="@+id/top_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:text="@string/egg_main_title"/>
 
-    <com.ishow.common.widget.recyclerview.AnimationRecyclerView
+    <tk.beason.common.widget.recyclerview.AnimationRecyclerView
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

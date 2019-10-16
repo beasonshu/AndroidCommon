@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.ishow.common.widget.TopBar
+    <tk.beason.common.widget.TopBar
         android:id="@+id/top_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,11 +37,11 @@
             android:text="Loading" />
     </LinearLayout>
 
-    <com.ishow.common.widget.VerifyCodeButton
+    <tk.beason.common.widget.VerifyCodeButton
         android:id="@+id/sendVerifyCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
-    <com.ishow.common.widget.StatusView
+    <tk.beason.common.widget.StatusView
         android:id="@+id/statusView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

@@ -20,13 +20,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.ishow.common.widget.TopBar
+    <tk.beason.common.widget.TopBar
         android:id="@+id/top_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:text="@string/sample_permission" />
 
-    <com.ishow.common.widget.flowlayout.FlowLayout
+    <tk.beason.common.widget.flowlayout.FlowLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:flowMode="wrap">
@@ -37,6 +37,6 @@
             style="@style/AppTextView.Sample"
             android:text="@string/sample_permission_sdcard" />
 
-    </com.ishow.common.widget.flowlayout.FlowLayout>
+    </tk.beason.common.widget.flowlayout.FlowLayout>
 
 </LinearLayout>

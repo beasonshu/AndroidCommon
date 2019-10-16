@@ -20,23 +20,23 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.ishow.common.widget.TopBar
+    <tk.beason.common.widget.TopBar
         android:id="@+id/top_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:text="@string/sample_permission" />
 
-    <com.ishow.common.widget.textview.TextViewPro
+    <tk.beason.common.widget.textview.TextViewPro
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:leftText="1211"/>
 
-    <com.ishow.common.widget.textview.TextViewPro
+    <tk.beason.common.widget.textview.TextViewPro
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:leftText="1211"/>
 
-    <com.ishow.common.widget.edittext.EditTextPro
+    <tk.beason.common.widget.edittext.EditTextPro
         android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
         app:leftText="@string/forgot_password_tip_password" />
 
 
-    <com.ishow.common.widget.edittext.EditTextPro
+    <tk.beason.common.widget.edittext.EditTextPro
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:inputType="textPassword"
@@ -60,7 +60,7 @@
         app:rightImageMarginStart="15dp"
         app:rightImageVisibility="visible" />
 
-    <com.ishow.common.widget.edittext.EditTextPro
+    <tk.beason.common.widget.edittext.EditTextPro
         android:id="@+id/test1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

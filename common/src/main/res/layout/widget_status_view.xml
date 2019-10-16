@@ -36,7 +36,7 @@
         android:scaleType="centerInside"
         android:src="@drawable/icon_no_server" />
 
-    <com.ishow.common.widget.spinkit.SpinKitView
+    <tk.beason.common.widget.spinkit.SpinKitView
         android:id="@+id/status_loading"
         style="@style/SpinKitView.Wave"
         android:layout_width="@dimen/dp_48"

@@ -212,9 +212,14 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     // 基础库
-    implementation project(':common')
+
 
     //  百度统计
     implementation 'com.baidu.mobstat:mtj-sdk:3.8.0.6'
+// https://mvnrepository.com/artifact/tk.beason/common
+    //implementation group: 'tk.beason', name: 'common', version: '1.0.1'
+// 基础库
+    implementation project(':common')
+
 }
 

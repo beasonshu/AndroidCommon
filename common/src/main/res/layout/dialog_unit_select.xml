@@ -14,7 +14,7 @@
   limitations under the License.
   -->
 
-<com.ishow.common.widget.ListViewPro xmlns:android="http://schemas.android.com/apk/res/android"
+<tk.beason.common.widget.ListViewPro xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/list"
     android:layout_width="match_parent"

@@ -255,12 +255,12 @@ public static java.lang.String TABLENAME;
 -dontwarn cn.sharesdk.**
 -dontwarn **.R$*
 
--keep class com.ishow.noahark.entries.**{*;}
--keep class com.ishow.common.entries.**{*;}
+-keep class tk.beason.noahark.entries.**{*;}
+-keep class tk.beason.common.entries.**{*;}
 
 -keepclassmembers class ** {
-    @com.ishow.common.utils.permission.PermissionGranted <methods>;
+    @tk.beason.common.utils.permission.PermissionGranted <methods>;
 }
 -keepclassmembers class ** {
-    @com.ishow.common.utils.permission.PermissionDenied <methods>;
+    @tk.beason.common.utils.permission.PermissionDenied <methods>;
 }
