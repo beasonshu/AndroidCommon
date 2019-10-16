@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The yuhaiyang Android Source Project
+ * Copyright (C) 2019 The beasonshu Android Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,52 +18,46 @@ package tk.beason.common.widget;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
-import android.os.Handler;
-import android.os.Message;
+import android.os.CountDownTimer;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.alibaba.fastjson.JSON;
-import tk.beason.common.R;
-import tk.beason.common.utils.StorageUtils;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.OnLifecycleEvent;
 
-/**
- * 发送验证码的button
- */
-@SuppressWarnings("unused")
-public class VerifyCodeButton extends FrameLayout {
-    private static final String TAG = "VerifyCodeButton";
+
+import java.util.Calendar;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import tk.beason.common.R;
+
+public class VerifyCodeButton extends FrameLayout implements LifecycleObserver{
+
+    private static final String SHARED_PREFERENCES_FILE = "CountDownTextView";
+    private static final String SHARED_PREFERENCES_FIELD_TIME = "last_count_time";
+    private static final String SHARED_PREFERENCES_FIELD_TIMESTAMP = "last_count_timestamp";
+    private static final String SHARED_PREFERENCES_FIELD_INTERVAL = "count_interval";
+    private static final String SHARED_PREFERENCES_FIELD_COUNTDOWN = "is_countdown";
     /**
      * 最大时间
      */
     private static final int VERIFY_MAX_TIME = 60;
-    /**
-     * 开始计时
-     */
-    private static final int HANDLER_TIME = 1000;
-    /**
-     * 重新计时
-     */
-    private static final int HANDLER_RESET_TIME = 1001;
-    /**
-     * 空闲状态
-     */
-    private static final int STATE_IDLE = 1000;
-    /**
-     * 发送状态
-     */
-    private static final int STATE_SENDING = 1001;
-    /**
-     * 计时状态
-     */
-    private static final int STATE_TIMING = 1002;
 
     /**
      * 进度条
@@ -80,6 +74,8 @@ public class VerifyCodeButton extends FrameLayout {
     private String mTextStr;
     private String mTimingTextStr;
 
+    private final String unId = getUniqueId();
+
     /**
      * 字体的颜色
      */
@@ -88,51 +84,35 @@ public class VerifyCodeButton extends FrameLayout {
      * 字体的大小
      */
     private int mTextSize;
-    /**
-     * 当前时间
-     */
-    private int mCurrentTime;
-    private int mMaxTime;
-    /**
-     * 当前状态
-     */
-    private int mStatus = STATE_IDLE;
-    private String mStatusKey;
 
-    @SuppressLint("HandlerLeak")
-    private Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case HANDLER_TIME:
-                    mCurrentTime--;
-                    if (mCurrentTime <= 0) {
-                        mHandler.sendEmptyMessage(HANDLER_RESET_TIME);
-                    } else {
-                        if (mTimingListener != null) {
-                            mTimingListener.onTiming(mCurrentTime);
-                        }
-                        updateTiming();
-                        sendEmptyMessageDelayed(HANDLER_TIME, 1000);
-                    }
-                    break;
+    /**
+     * 倒计时期间是否允许点击
+     */
+    private boolean mClickable = false;
 
-                case HANDLER_RESET_TIME:
-                    mStatus = STATE_IDLE;
-                    mHandler.removeMessages(HANDLER_TIME);
-                    mDisplayView.setText(mTextStr);
-                    mDisplayView.setVisibility(VISIBLE);
-                    mProgressBar.setVisibility(INVISIBLE);
-                    mCurrentTime = -1;
-                    setClickable(true);
-                    if (mTimingListener != null) {
-                        mTimingListener.onTimingEnd();
-                    }
-                    break;
-            }
-        }
-    };
+
+
+    /**
+     * 页面关闭后倒计时是否保持，再次开启倒计时继续；
+     */
+    private boolean mCloseKeepCountDown = false;
+    /**
+     * 是否把时间格式化成时分秒
+     */
+    private boolean mShowFormatTime = false;
+    /**
+     * 倒计时间隔
+     */
+    private TimeUnit mIntervalUnit = TimeUnit.SECONDS;
+
+    private OnCountDownStartListener mOnCountDownStartListener;
+    private OnCountDownTickListener mOnCountDownTickListener;
+    private OnCountDownFinishListener mOnCountDownFinishListener;
+
+
+    private CountDownTimer mCountDownTimer;
+
+
 
     public VerifyCodeButton(Context context) {
         this(context, null);
@@ -170,19 +150,191 @@ public class VerifyCodeButton extends FrameLayout {
         mDisplayView = getDisplayView();
         mDisplayView.setVisibility(VISIBLE);
         addView(mDisplayView);
-
-        mMaxTime = VERIFY_MAX_TIME;
-
-        final String contextName = context.getClass().getName();
-        mStatusKey = contextName.replace(".", "_") + "_" + getId();
+        init(context);
     }
+
+    private void init(Context context) {
+        autoBindLifecycle(context);
+    }
+    /**
+     * 控件自动绑定生命周期,宿主可以是activity或者fragment
+     */
+    private void autoBindLifecycle(Context context) {
+        if (context instanceof AppCompatActivity) {
+            FragmentActivity activity = (FragmentActivity) context;
+            FragmentManager fm = activity.getSupportFragmentManager();
+            List<Fragment> fragments = fm.getFragments();
+            for (Fragment fragment : fragments) {
+                View parent = fragment.getView();
+                if (parent != null) {
+                    View find = parent.findViewById(getId());
+                    if (find == this) {
+                        fragment.getLifecycle().addObserver(this);
+                        return;
+                    }
+                }
+            }
+        }
+        if (context instanceof LifecycleOwner) {
+            ((LifecycleOwner) context).getLifecycle().addObserver(this);
+        }
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    private void onResume() {
+        if (mCountDownTimer == null) {
+            checkLastCountTimestamp();
+        }
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+    private void onDestroy() {
+        if (mCountDownTimer != null) {
+            mCountDownTimer.cancel();
+            mCountDownTimer = null;
+        }
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        onDestroy();
+    }
+
+    /**
+     * 计时方案
+     *
+     * @param time        计时时长
+     * @param timeUnit    时间单位
+     * @param isCountDown 是否是倒计时，false正向计时
+     */
+    private void count(final long time, final long offset, final TimeUnit timeUnit, final boolean isCountDown) {
+        if (mCountDownTimer != null) {
+            mCountDownTimer.cancel();
+            mCountDownTimer = null;
+        }
+        setEnabled(mClickable);
+        final long millisInFuture = timeUnit.toMillis(time) + 500;
+        long interval = TimeUnit.MILLISECONDS.convert(1, mIntervalUnit);
+        if (mCloseKeepCountDown && offset == 0) {
+            setLastCountTimestamp(millisInFuture, interval, isCountDown);
+        }
+        if (offset == 0 && mOnCountDownStartListener != null) {
+            mOnCountDownStartListener.onStart();
+        }
+
+
+        mCountDownTimer = new CountDownTimer(millisInFuture, interval) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                long count = isCountDown ? millisUntilFinished : (millisInFuture - millisUntilFinished + offset);
+                long l = timeUnit.convert(count, TimeUnit.MILLISECONDS);
+                String showTime;
+                if (mShowFormatTime) {
+                    showTime = generateTime(count);
+                } else {
+                    showTime = String.valueOf(l);
+                }
+                mDisplayView.setText(String.format(mTimingTextStr, showTime));
+                if (mOnCountDownTickListener != null) {
+                    mOnCountDownTickListener.onTick(l);
+                }
+            }
+
+            @Override
+            public void onFinish() {
+                setEnabled(true);
+                mCountDownTimer = null;
+                mDisplayView.setText(mTextStr);
+                if (mOnCountDownFinishListener != null) {
+                    mOnCountDownFinishListener.onFinish();
+                }
+            }
+        };
+        mCountDownTimer.start();
+    }
+
+
+
+    /**
+     * 持久化
+     *
+     * @param time        倒计时时长
+     * @param interval    倒计时间隔
+     * @param isCountDown 是否是倒计时而不是正向计时
+     */
+    @SuppressLint("ApplySharedPref")
+    private void setLastCountTimestamp(long time, long interval, boolean isCountDown) {
+        getContext()
+                .getSharedPreferences(SHARED_PREFERENCES_FILE, Context.MODE_PRIVATE)
+                .edit()
+                .putLong(SHARED_PREFERENCES_FIELD_TIME + unId, time)
+                .putLong(SHARED_PREFERENCES_FIELD_TIMESTAMP + unId, Calendar.getInstance().getTimeInMillis() + time)
+                .putLong(SHARED_PREFERENCES_FIELD_INTERVAL + unId, interval)
+                .putBoolean(SHARED_PREFERENCES_FIELD_COUNTDOWN + unId, isCountDown)
+                .commit();
+
+    }
+
+    /**
+     * 检查持久化参数
+     *
+     * @return 是否要保持持久化计时
+     */
+    private boolean checkLastCountTimestamp() {
+        SharedPreferences sp = getContext().getSharedPreferences(SHARED_PREFERENCES_FILE, Context.MODE_PRIVATE);
+        long lastCountTimestamp = sp.getLong(SHARED_PREFERENCES_FIELD_TIMESTAMP + unId, -1);
+        long nowTimeMillis = Calendar.getInstance().getTimeInMillis();
+        long diff = lastCountTimestamp - nowTimeMillis;
+        if (diff <= 0) {
+            return false;
+        }
+        long time = sp.getLong(SHARED_PREFERENCES_FIELD_TIME + unId, -1);
+        long interval = sp.getLong(SHARED_PREFERENCES_FIELD_INTERVAL + unId, -1);
+        boolean isCountDown = sp.getBoolean(SHARED_PREFERENCES_FIELD_COUNTDOWN + unId, true);
+        for (TimeUnit timeUnit : TimeUnit.values()) {
+            long convert = timeUnit.convert(interval, TimeUnit.MILLISECONDS);
+            if (convert == 1) {
+                long last = timeUnit.convert(diff, TimeUnit.MILLISECONDS);
+                long offset = time - diff;
+                count(last, offset, timeUnit, isCountDown);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private String getUniqueId(){
+        return  getContext().getClass().getName().replace(".", "_") + "_" + getId();
+    }
+
+
+    /**
+     * 将毫秒转时分秒
+     */
+    @SuppressLint("DefaultLocale")
+    public static String generateTime(long time) {
+        String format;
+        int totalSeconds = (int) (time / 1000);
+        int seconds = totalSeconds % 60;
+        int minutes = (totalSeconds / 60) % 60;
+        int hours = totalSeconds / 3600;
+        if (hours > 0) {
+            format = String.format("%02d时%02d分%02d秒", hours, minutes, seconds);
+        } else if (minutes > 0) {
+            format = String.format("%02d分%02d秒", minutes, seconds);
+        } else {
+            format = String.format("%2d秒", seconds);
+        }
+        return format;
+    }
+
 
     /**
      * 显示Loading
      */
     public void showLoading() {
         // 如果当前是空闲状态
-        mStatus = STATE_SENDING;
         if (mTimingListener != null) {
             mTimingListener.onSending();
         }
@@ -201,42 +353,43 @@ public class VerifyCodeButton extends FrameLayout {
     /**
      * 开始计时
      */
-    public void startTiming(int maxTime) {
-        startTiming(maxTime, maxTime);
+    public void startTiming(int currentTime) {
+        setClickable(false);
+        mProgressBar.setVisibility(INVISIBLE);
+        mDisplayView.setVisibility(VISIBLE);
+        startCountDown(currentTime);
     }
 
 
     /**
-     * 开始计时
+     * 默认按秒倒计时
+     *
+     * @param second 多少秒
      */
-    private void startTiming(int maxTime, int currentTime) {
-        setClickable(false);
-        mMaxTime = maxTime;
-        mCurrentTime = currentTime;
-        mStatus = STATE_TIMING;
-        mProgressBar.setVisibility(INVISIBLE);
-        mDisplayView.setVisibility(VISIBLE);
-        mHandler.sendEmptyMessage(HANDLER_TIME);
+    public void startCountDown(long second) {
+        startCountDown(second, TimeUnit.SECONDS);
+    }
 
-        Status status = new Status();
-        status.startDate = System.currentTimeMillis();
-        status.remainTime = currentTime;
-        status.maxTime = maxTime;
+    public void startCountDown(int second){
+        startCountDown(second, TimeUnit.SECONDS);
+    }
 
-        StorageUtils.with(getContext())
-                .param(mStatusKey, JSON.toJSONString(status))
-                .save();
+    public void startCountDown(long time, final TimeUnit timeUnit) {
+        if (mCloseKeepCountDown && checkLastCountTimestamp()) {
+            return;
+        }
+        count(time, 0, timeUnit, true);
     }
 
     /**
      * 重新计时
      */
-    public void reset() {
-        mHandler.sendEmptyMessage(HANDLER_RESET_TIME);
 
-        StorageUtils.with(getContext())
-                .key(mStatusKey)
-                .remove();
+    public void reset() {
+        setClickable(true);
+        mProgressBar.setVisibility(INVISIBLE);
+        mDisplayView.setVisibility(VISIBLE);
+        onDestroy();
     }
 
     /**
@@ -286,39 +439,12 @@ public class VerifyCodeButton extends FrameLayout {
     private int getDefaultTextSize() {
         return getContext().getResources().getDimensionPixelSize(R.dimen.H_title);
     }
-
-
-    @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
-        String lastStatus = StorageUtils.with(getContext())
-                .key(mStatusKey)
-                .get(null);
-
-        if (TextUtils.isEmpty(lastStatus)) {
-            return;
-        }
-
-        Status status = JSON.parseObject(lastStatus, Status.class);
-
-        int remainTime = status.remainTime - (int) (System.currentTimeMillis() - status.startDate) / 1000;
-        if (remainTime > 0) {
-            startTiming(status.maxTime, remainTime);
-        } else {
-            StorageUtils.with(getContext())
-                    .key(mStatusKey)
-                    .remove();
-        }
-
-
+    public VerifyCodeButton setCloseKeepCountDown(boolean mCloseKeepCountDown) {
+        this.mCloseKeepCountDown = mCloseKeepCountDown;
+        return this;
     }
 
-    @Override
-    protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
-        //   当不再显示的的时候移除控制
-        mHandler.removeMessages(HANDLER_TIME);
-    }
+
 
     /**
      * 获取默认的颜色值
@@ -344,35 +470,16 @@ public class VerifyCodeButton extends FrameLayout {
      * 是否正在倒计时
      */
     public boolean isTiming() {
-        return mCurrentTime > 0;
+        return mDisplayView.isEnabled();
     }
 
-    /**
-     * 获取当前的时间
-     */
-    public int getCurrentTime() {
-        return mCurrentTime;
-    }
 
-    /**
-     * 更新计时器
-     */
-    private void updateTiming() {
-        if (TextUtils.isEmpty(mTimingTextStr)) {
-            mDisplayView.setText(getContext().getString(R.string.second_timing, mCurrentTime));
-        } else if (mTimingTextStr.contains("%d")) {
-            mDisplayView.setText(String.format(mTimingTextStr, mCurrentTime));
-        } else if (mTimingTextStr.contains("%s")) {
-            mDisplayView.setText(String.format(mTimingTextStr, String.valueOf(mCurrentTime)));
-        } else {
-            throw new IllegalStateException("timingText must %d or %s");
-        }
-    }
+
+
 
     /**
      * 时间监听
      */
-    @SuppressWarnings("WeakerAccess")
     public interface OnTimingListener {
         /**
          * 正在发送验证码
@@ -393,18 +500,31 @@ public class VerifyCodeButton extends FrameLayout {
     }
 
 
-    public static class Status {
+
+
+
+
+    public interface OnCountDownStartListener {
         /**
-         * 开始计时的日期
+         * 计时开始回调;反序列化时不会回调
          */
-        public long startDate;
-        /**
-         * 剩余时间
-         */
-        public int remainTime;
-        /**
-         * 最大时间
-         */
-        public int maxTime;
+        void onStart();
     }
+
+    public interface OnCountDownTickListener {
+        /**
+         * 计时回调
+         *
+         * @param untilFinished 剩余时间,单位为开始计时传入的单位
+         */
+        void onTick(long untilFinished);
+    }
+
+    public interface OnCountDownFinishListener {
+        /**
+         * 计时结束回调
+         */
+        void onFinish();
+    }
+
 }
