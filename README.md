@@ -2,10 +2,6 @@
 
 AndroidCommon是一个项目的基础框架，里面包含了常用的工具类、自定义的控件以及项目的基本功能等
 
-- [工具类](https://github.com/BrightYu/AndroidCommon/wiki/Utils)
-- [自定义控件](https://github.com/BrightYu/AndroidCommon/wiki/Widgets)
-- [基本功能](https://github.com/BrightYu/AndroidCommon/wiki/Modules)
-
 
 # JCenter
 ```
