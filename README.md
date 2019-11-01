@@ -2,14 +2,10 @@
 
 AndroidCommon是一个项目的基础框架，里面包含了常用的工具类、自定义的控件以及项目的基本功能等
 
-- [工具类](https://github.com/BrightYu/AndroidCommon/wiki/Utils)
-- [自定义控件](https://github.com/BrightYu/AndroidCommon/wiki/Widgets)
-- [基本功能](https://github.com/BrightYu/AndroidCommon/wiki/Modules)
-
 
 # JCenter
 ```
-compile 'tk.beason:common:1.1.2'
+api 'tk.beason:common:1.1.2'
 ```
 
 # 更新记录
@@ -22,7 +18,7 @@ compile 'tk.beason:common:1.1.2'
 
 # License
 
-    Copyright 2015 Haiyang Yu
+    Copyright 2019 Beason Shu
     
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
