@@ -5,16 +5,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
-import com.ishow.pulltorefresh.IPullToRefreshUtils;
-import com.ishow.pulltorefresh.PullToRefreshView;
-import com.ishow.pulltorefresh.headers.classic.ClassicHeader;
-import com.ishow.pulltorefresh.recycleview.LoadMoreAdapter;
 
 import tk.beason.common.widget.recyclerview.itemdecoration.LinearSpacingItemDecoration;
 import tk.beason.noah.R;
 import tk.beason.noah.modules.base.PullToRefreshActivity;
 
 import tk.beason.noah.modules.sample.entries.Job;
+import tk.beason.pulltorefresh.IPullToRefreshUtils;
+import tk.beason.pulltorefresh.PullToRefreshView;
+import tk.beason.pulltorefresh.headers.classic.ClassicHeader;
+import tk.beason.pulltorefresh.recycleview.LoadMoreAdapter;
+
 import java.util.List;
 
 /**

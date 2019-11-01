@@ -5,14 +5,14 @@ import android.view.View
 import tk.beason.common.utils.ToastUtils
 import tk.beason.common.widget.StatusView
 import tk.beason.noah.R
-import tk.beason.noah.modules.base.AppBaseActivity
 import kotlinx.android.synthetic.main.activity_sample_status_view.*
+import tk.beason.noah.modules.base.AppBaseActivity
 
 /**
 * Created by yuhaiyang on 2018-10-29.
 * StatusView
 */
-class SampleStatusViewActivity : tk.beason.noah.modules.base.AppBaseActivity(), View.OnClickListener, StatusView.OnStatusViewListener {
+class SampleStatusViewActivity : AppBaseActivity(), View.OnClickListener, StatusView.OnStatusViewListener {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -29,7 +29,6 @@ import androidx.fragment.app.FragmentTransaction
 import tk.beason.common.utils.ToastUtils
 import tk.beason.common.widget.BottomBar
 import tk.beason.noah.R
-import tk.beason.noah.modules.base.AppBaseActivity
 import tk.beason.noah.modules.main.home.HomeFragment
 import tk.beason.noah.modules.main.mine.MineFragment
 import tk.beason.noah.modules.main.tab2.Tab2Fragment
@@ -40,8 +39,8 @@ class MainActivity : tk.beason.noah.modules.base.AppBaseActivity(), BottomBar.On
 
     private var mBeforeFragment: Fragment? = null
     private var mTab1Fragment: HomeFragment? = null
-    private var mTab2Fragment: tk.beason.noah.modules.main.tab2.Tab2Fragment? = null
-    private var mTab3Fragment: tk.beason.noah.modules.main.tab3.Tab3Fragment? = null
+    private var mTab2Fragment: Tab2Fragment? = null
+    private var mTab3Fragment: Tab3Fragment? = null
     private var mTab4Fragment: MineFragment? = null
 
     private var mLastTime: Long = 0
@@ -106,7 +105,7 @@ class MainActivity : tk.beason.noah.modules.base.AppBaseActivity(), BottomBar.On
             }
             R.id.tab_2 -> {
                 if (mTab2Fragment == null) {
-                    mTab2Fragment = tk.beason.noah.modules.main.tab2.Tab2Fragment.newInstance()
+                    mTab2Fragment = Tab2Fragment.newInstance()
                 }
 
                 if (mTab2Fragment!!.isAdded) {
@@ -120,7 +119,7 @@ class MainActivity : tk.beason.noah.modules.base.AppBaseActivity(), BottomBar.On
             }
             R.id.tab_3 -> {
                 if (mTab3Fragment == null) {
-                    mTab3Fragment = tk.beason.noah.modules.main.tab3.Tab3Fragment.newInstance()
+                    mTab3Fragment = Tab3Fragment.newInstance()
                 }
                 if (mTab3Fragment!!.isAdded) {
                     transaction.show(mTab3Fragment!!)

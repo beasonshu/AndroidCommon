@@ -35,7 +35,7 @@ class SampleMainActivity : AppBaseActivity() {
         setContentView(R.layout.activity_sample_main)
 
         val adapter = SampleMainAdapter(this)
-        adapter.data = tk.beason.noah.modules.sample.main.SampleManager.getSamples()
+        adapter.data = SampleManager.getSamples()
 
         list.layoutManager = FlowLayoutManager()
         list.adapter = adapter

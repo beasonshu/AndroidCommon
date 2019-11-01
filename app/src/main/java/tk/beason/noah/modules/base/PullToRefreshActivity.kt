@@ -21,10 +21,9 @@ package tk.beason.noah.modules.base
 
 import android.util.Log
 import android.view.View
-import com.ishow.pulltorefresh.IPullToRefreshUtils
-import com.ishow.pulltorefresh.OnPullToRefreshListener
-import com.ishow.pulltorefresh.PullToRefreshView
-
+import tk.beason.pulltorefresh.IPullToRefreshUtils
+import tk.beason.pulltorefresh.OnPullToRefreshListener
+import tk.beason.pulltorefresh.PullToRefreshView
 
 
 /**
@@ -42,7 +41,7 @@ abstract class PullToRefreshActivity : tk.beason.noah.modules.base.AppBaseActivi
         }
         pullToRefreshUtils.isLoadingMoreState = false
         pullToRefreshUtils.resetPagerNumber()
-        view.setLoadMoreNormal()
+        view.setLoadMoreSuccess()
         loadData(view, pullToRefreshUtils.pagerNumber, pullToRefreshUtils.pagerSize)
     }
 

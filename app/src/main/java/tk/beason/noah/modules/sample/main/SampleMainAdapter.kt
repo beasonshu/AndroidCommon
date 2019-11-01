@@ -14,7 +14,7 @@ import tk.beason.noah.modules.sample.entries.Sample
  * Created by yuhaiyang on 2017/10/12.
  * Sample Main Adapter
  */
-internal class SampleMainAdapter(context: Context) : RecyclerAdapter<tk.beason.noah.modules.sample.entries.Sample, SampleMainAdapter.ViewHolder>(context) {
+internal class SampleMainAdapter(context: Context) : RecyclerAdapter<Sample, SampleMainAdapter.ViewHolder>(context) {
 
     override fun onCreateViewHolder(parent: ViewGroup, type: Int): ViewHolder {
         val item =  parent.inflate(R.layout.item_sample_main)
@@ -36,7 +36,7 @@ internal class SampleMainAdapter(context: Context) : RecyclerAdapter<tk.beason.n
         }
 
         override fun onClick(v: View) {
-            val entry = v.tag as tk.beason.noah.modules.sample.entries.Sample
+            val entry = v.tag as Sample
             entry.startAction(mContext)
         }
     }

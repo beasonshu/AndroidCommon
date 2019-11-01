@@ -32,10 +32,7 @@ class HomeFragment : AppBaseFragment() {
         return mRootView
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
-    }
 
 
     override fun onRightClick(v: View) {

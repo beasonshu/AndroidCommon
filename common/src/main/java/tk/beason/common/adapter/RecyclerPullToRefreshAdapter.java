@@ -18,10 +18,10 @@ package tk.beason.common.adapter;
 
 import android.content.Context;
 
-import com.ishow.pulltorefresh.IPullToRefreshUtils;
-import com.ishow.pulltorefresh.PullToRefreshView;
 
 import tk.beason.common.R;
+import tk.beason.pulltorefresh.IPullToRefreshUtils;
+import tk.beason.pulltorefresh.PullToRefreshView;
 
 import java.util.List;
 
@@ -154,7 +154,7 @@ public abstract class RecyclerPullToRefreshAdapter<DATA, HOLDER extends Recycler
         pullToRefresh.setRefreshEnable(true);
         pullToRefresh.setLoadMoreEnable(true);
         if (isLoadingMoreState()) {
-            pullToRefresh.setLoadMoreNormal();
+            pullToRefresh.setLoadMoreSuccess();
         } else {
             pullToRefresh.setRefreshNormal();
         }
