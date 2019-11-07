@@ -4,11 +4,9 @@ import tk.beason.noah.R;
 import tk.beason.noah.modules.sample.SampleStatusViewActivity;
 import tk.beason.noah.modules.sample.dialog.normal.SampleBaseDialogActivity;
 
-import tk.beason.noah.modules.sample.SampleStatusViewActivity;
 import tk.beason.noah.modules.sample.imageloader.SampleImageLoaderActivity;
 import tk.beason.noah.modules.sample.permission.SamplePermissionActivity;
 import tk.beason.noah.modules.sample.pickview.SamplePickerActivity;
-import tk.beason.noah.modules.sample.pulltorefresh.SamplePullToRefreshActivity;
 import tk.beason.noah.modules.sample.recycle.animation.SampleAnimationRecycleViewActivity;
 import tk.beason.noah.modules.sample.webview.loading.SampleLoadingWebViewActivity;
 import tk.beason.noah.modules.sample.dialog.select.SampleSelectDialogAndPickerDialog;
@@ -60,7 +58,7 @@ public class SampleManager {
         list.add(Sample.newInstance(R.string.sample_ani_recycle, SampleAnimationRecycleViewActivity.class));
         list.add(Sample.newInstance(R.string.sample_picker_and_select, SampleSelectDialogAndPickerDialog.class));
         list.add(Sample.newInstance(R.string.sample_loading_webview, SampleLoadingWebViewActivity.class));
-        list.add(Sample.newInstance(R.string.sample_pull_to_refresh, SamplePullToRefreshActivity.class));
+        //list.add(Sample.newInstance(R.string.sample_pull_to_refresh, SamplePullToRefreshActivity.class));
         list.add(Sample.newInstance(R.string.sample_base_dialog, SampleBaseDialogActivity.class));
         list.add(Sample.newInstance(R.string.sample_status_view, SampleStatusViewActivity.class));
         return list;
