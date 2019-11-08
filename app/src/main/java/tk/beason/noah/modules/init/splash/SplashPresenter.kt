@@ -3,20 +3,11 @@ package tk.beason.noah.modules.init.splash
 import android.Manifest
 import android.content.Context
 import android.text.TextUtils
-
 import com.alibaba.fastjson.JSONObject
-import com.baidu.mobstat.StatService
 import tk.beason.common.utils.DeviceUtils
 import tk.beason.common.utils.http.rest.Http
 import tk.beason.common.utils.http.rest.HttpError
 import tk.beason.common.utils.permission.PermissionManager
-import tk.beason.noah.constant.Configure
-import tk.beason.noah.constant.Url
-import tk.beason.noah.entries.UserContainer
-import tk.beason.noah.manager.ConfigureManager
-import tk.beason.noah.manager.UserManager
-import tk.beason.noah.manager.VersionManager
-import tk.beason.noah.modules.base.AppBaseActivity
 import tk.beason.noah.utils.http.AppHttpCallBack
 
 /**
@@ -62,7 +53,7 @@ internal class SplashPresenter(private val mView: SplashContract.View) : SplashC
 
     override fun preInit(context: Context) {
         // 百度统计 - 进入就开始初始化
-        StatService.start(context)
+
         initStartTime = System.currentTimeMillis()
         isInitFinished = false
         mLoginSuccess = false

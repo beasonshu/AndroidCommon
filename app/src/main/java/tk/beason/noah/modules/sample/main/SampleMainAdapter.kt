@@ -5,10 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 
-import tk.beason.common.adapter.RecyclerAdapter
 import tk.beason.common.extensions.inflate
 import tk.beason.noah.R
 import tk.beason.noah.modules.sample.entries.Sample
+import tk.beason.pulltorefresh.adapter.RecyclerAdapter
 
 /**
  * Created by yuhaiyang on 2017/10/12.

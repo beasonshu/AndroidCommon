@@ -3,11 +3,8 @@ package tk.beason.noah.modules.base
 import android.app.Dialog
 import android.view.View
 import android.view.ViewGroup
-import com.baidu.mobstat.StatService
 import tk.beason.common.app.activity.BaseActivity
 import tk.beason.common.widget.watermark.WaterMarkView
-import tk.beason.noah.AppApplication
-import tk.beason.noah.manager.VersionManager
 import tk.beason.noah.ui.widget.dialog.VersionDialog
 
 
@@ -48,18 +45,11 @@ abstract class AppBaseActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-        // 百度统计
-        StatService.onResume(this)
+
 
         if (needShowUpdateVersionDialog() && tk.beason.noah.manager.VersionManager.instance.hasNewVersion(context)) {
             showVersionDialog()
         }
-    }
-
-    override fun onPause() {
-        super.onPause()
-        // 百度统计
-        StatService.onPause(this)
     }
 
 

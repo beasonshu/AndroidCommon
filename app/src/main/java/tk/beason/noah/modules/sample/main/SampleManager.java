@@ -4,7 +4,6 @@ import tk.beason.noah.R;
 import tk.beason.noah.modules.sample.SampleStatusViewActivity;
 import tk.beason.noah.modules.sample.dialog.normal.SampleBaseDialogActivity;
 
-import tk.beason.noah.modules.sample.SampleStatusViewActivity;
 import tk.beason.noah.modules.sample.imageloader.SampleImageLoaderActivity;
 import tk.beason.noah.modules.sample.permission.SamplePermissionActivity;
 import tk.beason.noah.modules.sample.pickview.SamplePickerActivity;

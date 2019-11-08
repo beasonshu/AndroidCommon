@@ -9,6 +9,7 @@ import tk.beason.common.utils.router.AppRouter
 import tk.beason.noah.constant.Configure
 import tk.beason.noah.modules.base.AppBaseActivity
 import tk.beason.noah.modules.main.MainActivity
+import tk.beason.noah.modules.sample.main.SampleMainActivity
 
 /**
  * Created by yuhaiyang on 2018/3/27.
@@ -80,19 +81,19 @@ class SplashActivity : tk.beason.noah.modules.base.AppBaseActivity(), SplashCont
         when (mPresenter.target) {
             SplashPresenter.Target.MAIN -> {
                 AppRouter.with(this)
-                        .target(MainActivity::class.java)!!
+                        .target(SampleMainActivity::class.java)!!
                         .finishSelf()!!
                         .start()
             }
             SplashPresenter.Target.LOGIN -> {
                 AppRouter.with(this)
-                        .target(MainActivity::class.java)!!
+                        .target(SampleMainActivity::class.java)!!
                         .finishSelf()!!
                         .start()
             }
             SplashPresenter.Target.GUIDE -> {
                 AppRouter.with(this)
-                        .target(MainActivity::class.java)!!
+                        .target(SampleMainActivity::class.java)!!
                         .finishSelf()!!
                         .start()
             }

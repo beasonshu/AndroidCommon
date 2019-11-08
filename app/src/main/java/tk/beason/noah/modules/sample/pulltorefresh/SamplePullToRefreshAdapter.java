@@ -6,17 +6,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import tk.beason.common.adapter.RecyclerAdapter;
-import tk.beason.common.adapter.RecyclerPullToRefreshAdapter;
+import org.jetbrains.annotations.NotNull;
+
 import tk.beason.common.utils.image.loader.ImageLoader;
 import tk.beason.noah.R;
 
 import tk.beason.noah.modules.sample.entries.Job;
-import tk.beason.noah.modules.sample.entries.Job;
-import tk.beason.noah.modules.sample.entries.Job;
+import tk.beason.pulltorefresh.adapter.RecyclerAdapter;
+import tk.beason.pulltorefresh.adapter.RecyclerPullToRefreshAdapter;
 
 /**
- * Created by yuhaiyang on 2017/6/29.
+ *
  * 首页热门
  */
 
@@ -29,7 +29,7 @@ class SamplePullToRefreshAdapter extends RecyclerPullToRefreshAdapter<Job, Sampl
 
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int type) {
+    public ViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int type) {
         View item = mLayoutInflater.inflate(R.layout.item_sample_pulltorefresh, parent, false);
         return new ViewHolder(item, type);
     }
@@ -53,8 +53,8 @@ class SamplePullToRefreshAdapter extends RecyclerPullToRefreshAdapter<Job, Sampl
 
         ViewHolder(View item, int type) {
             super(item, type);
-            image = (ImageView) item.findViewById(R.id.image);
-            name = (TextView) item.findViewById(R.id.name);
+            image = item.findViewById(R.id.image);
+            name = item.findViewById(R.id.name);
         }
     }
 }
