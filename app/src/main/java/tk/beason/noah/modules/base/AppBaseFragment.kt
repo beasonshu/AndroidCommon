@@ -1,6 +1,5 @@
 package tk.beason.noah.modules.base
 
-import com.baidu.mobstat.StatService
 import tk.beason.common.app.fragment.BaseFragment
 
 /**
@@ -10,15 +9,15 @@ import tk.beason.common.app.fragment.BaseFragment
  */
 open class AppBaseFragment : BaseFragment() {
 
-    override fun onPause() {
-        super.onPause()
-        // 页面埋点
-        StatService.onPageEnd(activity, null)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        // 页面埋点
-        StatService.onPageStart(activity, null)
-    }
+//    override fun onPause() {
+//        super.onPause()
+//        // 页面埋点
+//        StatService.onPageEnd(activity, null)
+//    }
+//
+//    override fun onResume() {
+//        super.onResume()
+//        // 页面埋点
+//        StatService.onPageStart(activity, null)
+//    }
 }

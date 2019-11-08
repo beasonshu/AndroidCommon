@@ -25,17 +25,17 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 
 import tk.beason.common.R;
-import tk.beason.common.adapter.RecyclerAdapter;
 import tk.beason.common.entries.Photo;
 import tk.beason.common.modules.image.show.ShowPhotoDialog;
 import tk.beason.common.utils.ToastUtils;
 import tk.beason.common.utils.image.loader.ImageLoader;
+import tk.beason.pulltorefresh.adapter.RecyclerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Bright.Yu on 2017/1/23.
+
  * 图片选择期的Adapter
  */
 

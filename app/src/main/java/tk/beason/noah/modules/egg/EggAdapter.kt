@@ -21,16 +21,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 
-import tk.beason.common.adapter.RecyclerAdapter
 import tk.beason.noah.R
 import tk.beason.noah.entries.egg.Egg
+import tk.beason.pulltorefresh.adapter.RecyclerAdapter
 
 /**
  * Created by yuhaiyang on 2017/6/5.
  * 彩蛋
  */
 
-internal class EggAdapter(context: Context) : RecyclerAdapter<tk.beason.noah.entries.egg.Egg, EggAdapter.ViewHolder>(context) {
+internal class EggAdapter(context: Context) : RecyclerAdapter<Egg, EggAdapter.ViewHolder>(context) {
 
     override fun onCreateViewHolder(parent: ViewGroup, type: Int): ViewHolder {
         val item = mLayoutInflater.inflate(R.layout.item_egg_list, parent, false)

@@ -21,10 +21,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import tk.beason.common.adapter.RecyclerAdapter;
 import tk.beason.common.modules.image.show.ShowPhotoDialog;
 import tk.beason.common.utils.image.loader.ImageLoader;
 import tk.beason.noah.R;
+import tk.beason.pulltorefresh.adapter.RecyclerAdapter;
 
 /**
  * Created by Bright.Yu on 2017/1/16.
