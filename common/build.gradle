@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The yuhaiyang Android Source Project
+ * Copyright (C) 2019 The beasonshu Android Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -99,7 +99,7 @@ publish {
     userOrg = 'beasonshu'//bintray.com用户名
     groupId = 'tk.beason'//jcenter上的路径
     artifactId = 'common'//项目名称
-    publishVersion = "1.0.3"//版本号
+    publishVersion = "1.0.5"//版本号
     desc = 'common'
     website = 'https://github.com/beasonshu/AndroidCommon'
 }
