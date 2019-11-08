@@ -9,6 +9,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.provider.Settings;
+import androidx.core.app.ActivityCompat;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
@@ -54,6 +55,7 @@ public class DeviceUtils {
         String id = StringUtils.EMPTY;
         try {
             id = manager.getDeviceId();
+            Log.i(TAG, "getDeviceId = " + id);
         } catch (Exception e) {
             Log.i(TAG, "deviceId: e = " + e.toString());
         }
@@ -63,8 +65,9 @@ public class DeviceUtils {
 
         try {
             id = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
+            Log.i(TAG, "ANDROID_ID: = " + id);
         } catch (Exception e) {
-            Log.i(TAG, "deviceId: e =" + e.toString());
+            Log.i(TAG, "c" + e.toString());
         }
         return id;
     }
@@ -75,11 +78,13 @@ public class DeviceUtils {
         if (!PermissionManager.hasPermission(context, Manifest.permission.READ_PHONE_STATE)) {
             return StringUtils.EMPTY;
         }
-        @SuppressLint("MissingPermission")
-        String imsi = telephonyManager.getSubscriberId();
+
+        String imsi = null;
+        imsi = telephonyManager.getSimOperator();
         if (imsi == null) {
             return StringUtils.EMPTY;
         }
+        Log.e("imsi",imsi);
         if (imsi.startsWith("46000") || imsi.startsWith("46002") || imsi.startsWith("46007")) {
             operator = "中国移动";
         } else if (imsi.startsWith("46001") || imsi.startsWith("46006")) {
