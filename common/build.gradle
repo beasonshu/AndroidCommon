@@ -99,7 +99,7 @@ publish {
     userOrg = 'beasonshu'//bintray.com用户名
     groupId = 'tk.beason'//jcenter上的路径
     artifactId = 'common'//项目名称
-    publishVersion = "1.0.9"//版本号
+    publishVersion = "1.0.10"//版本号
     desc = 'common'
     website = 'https://github.com/beasonshu/AndroidCommon'
 }
@@ -122,5 +122,5 @@ dependencies {
     api "com.squareup.okhttp3:okhttp:${OKHTTP_VERSION}"
     // JSON 解析工具
     api "com.alibaba:fastjson:${FAST_JSON_VERSION}"
-    api 'tk.beason:pullRefresh:1.0.5'
+    api 'tk.beason:pullRefresh:1.0.6'
 }
