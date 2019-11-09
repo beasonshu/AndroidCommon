@@ -25,13 +25,13 @@ public class SampleImageLoaderActivity extends AppBaseActivity {
         ImageView imageView = (ImageView) findViewById(R.id.test1);
 
         ImageLoader.with(this)
-                .load("http://www.yuhaiyang.net/picture/1.webp")
+                .load("http://www.beasontk.net/picture/1.webp")
                 .into(imageView);
 
         imageView = (ImageView) findViewById(R.id.test2);
 
         ImageLoader.with(this)
-                .load("http://www.yuhaiyang.net/picture/1.webp")
+                .load("http://www.beasontk.net/picture/1.webp")
                 .mode(ImageLoader.LoaderMode.CIRCLE_CROP)
                 .into(imageView);
     }

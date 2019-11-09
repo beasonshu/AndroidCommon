@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2016 The yuhaiyang Android Source Project
+ * Copyright (C) 2016 The beasontk Android Source Project
  *
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,7 +28,7 @@ import tk.beason.common.mvp.base.IViewStatus
 
 
 /**
- * Created by yuhaiyang on 2018/8/8.
+ * Created by beasontk on 2018/8/8.
  * 忘记密码的Contract
  */
 internal interface ForgotPasswordContract {

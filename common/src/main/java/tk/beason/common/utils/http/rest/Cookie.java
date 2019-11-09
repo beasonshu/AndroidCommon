@@ -7,7 +7,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /**
- * Created by yuhaiyang on 2017/5/27.
+ * Created by beasontk on 2017/5/27.
  * Cookie
  */
 @Keep

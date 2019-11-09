@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The yuhaiyang Android Source Project
+ * Copyright (C) 2016 The beasontk Android Source Project
  * <p/>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ import tk.beason.noah.manager.UserManager
 import tk.beason.noah.utils.http.AppHttpCallBack
 
 /**
- * Created by yuhaiyang on 2018/8/8.
+ * Created by beasontk on 2018/8/8.
  * 登录的Presenter
  */
 internal class LoginPresenter(private val mView: tk.beason.noah.modules.account.login.LoginContract.View) :

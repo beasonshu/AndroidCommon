@@ -8,7 +8,7 @@ import tk.beason.common.mvp.base.IViewStatus
 import tk.beason.noah.entries.UserContainer
 
 /**
- * Created by yuhaiyang on 2018/3/28.
+ * Created by beasontk on 2018/3/28.
  * Contract
  */
 

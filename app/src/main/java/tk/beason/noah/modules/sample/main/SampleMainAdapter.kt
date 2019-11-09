@@ -11,7 +11,7 @@ import tk.beason.noah.modules.sample.entries.Sample
 import tk.beason.pulltorefresh.adapter.RecyclerAdapter
 
 /**
- * Created by yuhaiyang on 2017/10/12.
+ * Created by beasontk on 2017/10/12.
  * Sample Main Adapter
  */
 internal class SampleMainAdapter(context: Context) : RecyclerAdapter<Sample, SampleMainAdapter.ViewHolder>(context) {

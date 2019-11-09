@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2016 The yuhaiyang Android Source Project
+ * Copyright (C) 2016 The beasontk Android Source Project
  *
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,7 +26,7 @@ import tk.beason.noah.modules.base.AppBaseActivity
 import kotlinx.android.synthetic.main.activity_password.*
 
 /**
- * Created by yuhaiyang on 2018/8/8.
+ * Created by beasontk on 2018/8/8.
  * 修改密码和重置密码一系类的东西
  * 和注册分开预防后期业务更改
  */

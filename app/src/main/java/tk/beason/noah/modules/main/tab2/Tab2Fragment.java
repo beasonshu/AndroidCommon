@@ -13,7 +13,7 @@ import tk.beason.common.widget.StatusView;
 import tk.beason.noah.modules.base.AppBaseFragment;
 
 /**
- * Created by yuhaiyang on 2017/4/21.
+ * Created by beasontk on 2017/4/21.
  * Home Fragment
  */
 

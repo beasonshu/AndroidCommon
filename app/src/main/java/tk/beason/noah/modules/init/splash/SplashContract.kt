@@ -8,7 +8,7 @@ import tk.beason.common.mvp.base.IViewStatus
 import tk.beason.noah.modules.base.AppBaseActivity
 
 /**
- * Created by yuhaiyang on 2018/3/27.
+ * Created by beasontk on 2018/3/27.
  * Splash操作
  */
 

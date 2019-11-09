@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017. The yuhaiyang Android Source Project
+ * Copyright (C) 2017. The beasontk Android Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,7 +32,7 @@ import kotlinx.android.synthetic.main.dialog_version.*
 import tk.beason.noah.R
 
 /**
- * Created by yuhaiyang on 2017/8/1.
+ * Created by beasontk on 2017/8/1.
  * 版本信息的Dialog
  */
 

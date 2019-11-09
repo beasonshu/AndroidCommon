@@ -12,7 +12,7 @@ import android.widget.FrameLayout;
 import tk.beason.common.R;
 
 /**
- * Created by yuhaiyang on 2018/1/23.
+ * Created by beasontk on 2018/1/23.
  * 带有水印的LinearLayout
  */
 

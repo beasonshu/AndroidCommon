@@ -8,7 +8,7 @@ import tk.beason.common.mvp.base.IViewStatus
 import tk.beason.noah.entries.User
 
 /**
- * Created by yuhaiyang on 2018/8/8.
+ * Created by beasontk on 2018/8/8.
  * 修改用户信息-Contract
  */
 internal interface ModifyUserInfoContract {

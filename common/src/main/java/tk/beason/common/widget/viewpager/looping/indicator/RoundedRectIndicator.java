@@ -9,7 +9,7 @@ import tk.beason.common.utils.UnitUtils;
 import tk.beason.common.widget.viewpager.looping.ILoopingIndicator;
 
 /**
- * Created by yuhaiyang on 2018/9/13.
+ * Created by beasontk on 2018/9/13.
  * 圆角矩形
  */
 public class RoundedRectIndicator implements ILoopingIndicator {

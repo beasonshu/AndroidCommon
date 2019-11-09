@@ -3,7 +3,7 @@ package tk.beason.noah.modules.sample.entries;
 import com.alibaba.fastjson.annotation.JSONField;
 
 /**
- * Created by yuhaiyang on 2017/6/29.
+ * Created by beasontk on 2017/6/29.
  * 工作
  */
 

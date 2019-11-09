@@ -3,13 +3,13 @@ package tk.beason.noah.constant
 import tk.beason.common.utils.StringUtils
 
 /**
- * Created by yuhaiyang on 2018/3/22.
+ * Created by beasontk on 2018/3/22.
  * 连接地址
  */
 
 object Url {
     private val baseUrl: String
-        get() = "https://api.yuhaiyang.net/common"
+        get() = "https://api.beasontk.net/common"
 
     /**
      * 登录

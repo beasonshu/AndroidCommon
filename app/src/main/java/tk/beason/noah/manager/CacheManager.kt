@@ -5,7 +5,7 @@ import android.content.Context
 import java.lang.ref.WeakReference
 
 /**
- * Created by yuhaiyang on 2018/8/8.
+ * Created by beasontk on 2018/8/8.
  * 缓存管理
  */
 class CacheManager private constructor() {

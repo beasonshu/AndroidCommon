@@ -5,7 +5,7 @@ import androidx.annotation.DimenRes;
 import android.view.View;
 
 /**
- * Created by yuhaiyang on 2017/5/19.
+ * Created by beasontk on 2017/5/19.
  * LabelView的接口
  */
 

@@ -8,7 +8,7 @@ import tk.beason.common.utils.UnitUtils;
 import tk.beason.common.widget.viewpager.looping.ILoopingIndicator;
 
 /**
- * Created by yuhaiyang on 2018/9/13.
+ * Created by beasontk on 2018/9/13.
  * 默认的
  */
 public class DefaultLoopingIndicator implements ILoopingIndicator {

@@ -89,7 +89,7 @@
             android:exported="false"
             android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="com.yuhaiyang.androidcommon.Test" />
+                <action android:name="com.beasontk.androidcommon.Test" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

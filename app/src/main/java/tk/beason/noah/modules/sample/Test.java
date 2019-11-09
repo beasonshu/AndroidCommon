@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2016 yuhaiyang android source project
+ * Copyright (C) 2016 beasontk android source project
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,18 +29,18 @@ public class Test {
     private static final String TAG = "Test";
 
     public static final String[] IMAGE_LIST = new String[]{
-            "http://www.yuhaiyang.net/images/portfolio-1.jpg",
-            "http://www.yuhaiyang.net/images/portfolio-2.jpg",
-            "http://www.yuhaiyang.net/images/portfolio-3.jpg",
-            "http://www.yuhaiyang.net/images/portfolio-4.jpg",
-            "http://www.yuhaiyang.net/images/portfolio-5.jpg",
-            "http://www.yuhaiyang.net/images/portfolio-6.jpg",
-            "http://www.yuhaiyang.net/images/portfolio-7.jpg",
-            "http://www.yuhaiyang.net/images/portfolio-8.jpg",
-            "http://www.yuhaiyang.net/images/portfolio-9.jpg",
-            "http://www.yuhaiyang.net/images/portfolio-10.jpg",
-            "http://www.yuhaiyang.net/images/portfolio-11.jpg",
-            "http://www.yuhaiyang.net/images/portfolio-12.jpg",
+            "http://www.beasontk.net/images/portfolio-1.jpg",
+            "http://www.beasontk.net/images/portfolio-2.jpg",
+            "http://www.beasontk.net/images/portfolio-3.jpg",
+            "http://www.beasontk.net/images/portfolio-4.jpg",
+            "http://www.beasontk.net/images/portfolio-5.jpg",
+            "http://www.beasontk.net/images/portfolio-6.jpg",
+            "http://www.beasontk.net/images/portfolio-7.jpg",
+            "http://www.beasontk.net/images/portfolio-8.jpg",
+            "http://www.beasontk.net/images/portfolio-9.jpg",
+            "http://www.beasontk.net/images/portfolio-10.jpg",
+            "http://www.beasontk.net/images/portfolio-11.jpg",
+            "http://www.beasontk.net/images/portfolio-12.jpg",
     };
 
     public static final String[] IMAGE_3 = new String[]{
@@ -51,24 +51,24 @@ public class Test {
 
 
     public static final String[] HEADER_LIST = new String[]{
-            "http://www.yuhaiyang.net/header/header1.jpg",
-            "http://www.yuhaiyang.net/header/header2.jpg",
-            "http://www.yuhaiyang.net/header/header3.jpg",
-            "http://www.yuhaiyang.net/header/header4.jpg",
-            "http://www.yuhaiyang.net/header/header5.jpg",
-            "http://www.yuhaiyang.net/header/header6.jpg",
-            "http://www.yuhaiyang.net/header/header7.jpg",
-            "http://www.yuhaiyang.net/header/header8.jpg",
-            "http://www.yuhaiyang.net/header/header9.jpg",
-            "http://www.yuhaiyang.net/header/header10.jpg",
-            "http://www.yuhaiyang.net/header/header11.jpg",
-            "http://www.yuhaiyang.net/header/header12.jpg",
-            "http://www.yuhaiyang.net/header/header13.jpg",
-            "http://www.yuhaiyang.net/header/header14.jpg",
-            "http://www.yuhaiyang.net/header/header15.jpg",
-            "http://www.yuhaiyang.net/header/header16.jpg",
-            "http://www.yuhaiyang.net/header/header17.jpg",
-            "http://www.yuhaiyang.net/header/header18.jpg",
+            "http://www.beasontk.net/header/header1.jpg",
+            "http://www.beasontk.net/header/header2.jpg",
+            "http://www.beasontk.net/header/header3.jpg",
+            "http://www.beasontk.net/header/header4.jpg",
+            "http://www.beasontk.net/header/header5.jpg",
+            "http://www.beasontk.net/header/header6.jpg",
+            "http://www.beasontk.net/header/header7.jpg",
+            "http://www.beasontk.net/header/header8.jpg",
+            "http://www.beasontk.net/header/header9.jpg",
+            "http://www.beasontk.net/header/header10.jpg",
+            "http://www.beasontk.net/header/header11.jpg",
+            "http://www.beasontk.net/header/header12.jpg",
+            "http://www.beasontk.net/header/header13.jpg",
+            "http://www.beasontk.net/header/header14.jpg",
+            "http://www.beasontk.net/header/header15.jpg",
+            "http://www.beasontk.net/header/header16.jpg",
+            "http://www.beasontk.net/header/header17.jpg",
+            "http://www.beasontk.net/header/header18.jpg",
     };
 
     public static final String[] NAME = new String[]{

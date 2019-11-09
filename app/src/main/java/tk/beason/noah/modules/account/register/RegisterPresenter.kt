@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2016 The yuhaiyang Android Source Project
+ * Copyright (C) 2016 The beasontk Android Source Project
  *
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -32,7 +32,7 @@ import tk.beason.noah.utils.http.AppHttpCallBack
 import java.util.*
 
 /**
- * Created by yuhaiyang on 2018/8/8.
+ * Created by beasontk on 2018/8/8.
  * 注册的Presenter
  */
 internal class RegisterPresenter(private val mView: tk.beason.noah.modules.account.register.RegisterContract.View) :

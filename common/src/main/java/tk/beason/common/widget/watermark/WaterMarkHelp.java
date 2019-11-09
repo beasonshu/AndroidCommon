@@ -11,7 +11,7 @@ import android.view.View;
 import tk.beason.common.R;
 
 /**
- * Created by yuhaiyang on 2018/1/23.
+ * Created by beasontk on 2018/1/23.
  * 水印的参数
  */
 

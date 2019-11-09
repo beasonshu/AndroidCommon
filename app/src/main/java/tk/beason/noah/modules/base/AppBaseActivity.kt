@@ -9,7 +9,7 @@ import tk.beason.noah.ui.widget.dialog.VersionDialog
 
 
 /**
- * Created by yuhaiyang on 2018/8/8.
+ * Created by beasontk on 2018/8/8.
  * App层面的BaseActivity
  */
 abstract class AppBaseActivity : BaseActivity() {

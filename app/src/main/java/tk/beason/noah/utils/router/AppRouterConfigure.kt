@@ -5,7 +5,7 @@ import tk.beason.common.utils.router.AppRouter
 
 
 /**
- * Created by yuhaiyang on 2018/2/24.
+ * Created by beasontk on 2018/2/24.
  * APP 定制router
  */
 

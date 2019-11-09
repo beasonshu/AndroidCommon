@@ -3,7 +3,7 @@ package tk.beason.common.utils.cache;
 import java.util.LinkedHashMap;
 
 /**
- * Created by yuhaiyang on 2018/9/21.
+ * Created by beasontk on 2018/9/21.
  * Least Recently Used
  */
 public class LRUCache<K, V> extends LinkedHashMap<K, V> {

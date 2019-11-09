@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.util.AttributeSet;
 
 /**
- * Created by yuhaiyang on 2018/9/12.
+ * Created by beasontk on 2018/9/12.
  * 禁止滚动的LinearLayoutManager
  */
 public class NoScrollLinearLayoutManager extends LinearLayoutManager{

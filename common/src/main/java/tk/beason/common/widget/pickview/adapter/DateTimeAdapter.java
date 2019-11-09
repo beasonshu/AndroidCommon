@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The yuhaiyang Android Source Project
+ * Copyright (C) 2016 The beasontk Android Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ package tk.beason.common.widget.pickview.adapter;
 import androidx.annotation.IntRange;
 
 /**
- * Created by yuhaiyang on 2017/4/25.
+ * Created by beasontk on 2017/4/25.
  * 时间选择器
  */
 

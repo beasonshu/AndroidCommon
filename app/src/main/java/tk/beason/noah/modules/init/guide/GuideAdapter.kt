@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import tk.beason.noah.R
 
 /**
- * Created by yuhaiyang on 2018/8/8.
+ * Created by beasontk on 2018/8/8.
  * Guide的Adapter
  */
 internal class GuideAdapter( mContext: Context, private val mClickListener: View.OnClickListener) : PagerAdapter() {

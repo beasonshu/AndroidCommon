@@ -6,7 +6,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /**
- * Created by yuhaiyang on 2017/12/18.
+ * Created by beasontk on 2017/12/18.
  * 提示类型
  */
 

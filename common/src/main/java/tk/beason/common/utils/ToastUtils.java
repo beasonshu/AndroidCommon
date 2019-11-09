@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The yuhaiyang Android Source Project
+ * Copyright (C) 2016 The beasontk Android Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,12 +25,12 @@ import android.util.Log;
 import android.widget.Toast;
 
 /**
- * Created by yuhaiyang on 2017/5/25.
+ * Created by beasontk on 2017/5/25.
  * Toast 显示工具类
  * <p>
  * ToastUtils 集成为单例Toast 预防多次提示
  *
- * @author yuhaiyang
+ * @author beasontk
  */
 @SuppressWarnings("unused")
 public class ToastUtils {

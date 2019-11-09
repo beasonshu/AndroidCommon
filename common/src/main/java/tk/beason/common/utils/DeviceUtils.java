@@ -18,7 +18,7 @@ import android.util.Log;
 import tk.beason.common.utils.permission.PermissionManager;
 
 /**
- * Created by yuhaiyang on 2017/5/10.
+ * Created by beasontk on 2017/5/10.
  * 设备相关的信息
  */
 @SuppressWarnings({"unused", "WeakerAccess"})

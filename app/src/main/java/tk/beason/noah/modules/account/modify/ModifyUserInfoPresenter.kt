@@ -12,7 +12,7 @@ import tk.beason.noah.utils.http.AppHttpCallBack
 import java.io.File
 
 /**
- * Created by yuhaiyang on 2018/8/8.
+ * Created by beasontk on 2018/8/8.
  * 修改用户信息的Presenter
  */
 internal class ModifyUserInfoPresenter(private val mView: tk.beason.noah.modules.account.modify.ModifyUserInfoContract.View) :

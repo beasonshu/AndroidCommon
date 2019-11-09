@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The yuhaiyang Android Source Project
+ * Copyright (C) 2016 The beasontk Android Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ import tk.beason.common.R;
 import tk.beason.common.utils.UnitUtils;
 
 /**
- * Created by yuhaiyang on 2018/9/5.
+ * Created by beasontk on 2018/9/5.
  * 破折线
  */
 @SuppressWarnings("unused")

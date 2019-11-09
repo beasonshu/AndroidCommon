@@ -12,7 +12,7 @@ import tk.beason.noah.modules.main.MainActivity
 import tk.beason.noah.modules.sample.main.SampleMainActivity
 
 /**
- * Created by yuhaiyang on 2018/3/27.
+ * Created by beasontk on 2018/3/27.
  * Splash
  */
 class SplashActivity : tk.beason.noah.modules.base.AppBaseActivity(), SplashContract.View {

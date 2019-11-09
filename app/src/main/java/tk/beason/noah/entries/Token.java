@@ -1,7 +1,7 @@
 package tk.beason.noah.entries;
 
 /**
- * Created by yuhaiyang on 2018/3/27.
+ * Created by beasontk on 2018/3/27.
  * Token
  */
 

@@ -3,7 +3,7 @@ package tk.beason.common.widget.viewpager.looping;
 import android.graphics.Canvas;
 
 /**
- * Created by yuhaiyang on 2018/9/13.
+ * Created by beasontk on 2018/9/13.
  * 小点点
  */
 public interface ILoopingIndicator {

@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import android.util.AttributeSet;
 
 /**
- * Created by yuhaiyang on 2017/8/9.
+ * Created by beasontk on 2017/8/9.
  * 不滑动的GridLayoutManager
  */
 

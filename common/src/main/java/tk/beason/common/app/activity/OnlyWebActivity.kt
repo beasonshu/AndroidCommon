@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2016 The yuhaiyang Android Source Project
+ * Copyright (C) 2016 The beasontk Android Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ import tk.beason.common.R
 
 /**
  * 只有一个Webview的 Activity
- * Created by yuhaiyang on 2016/8/9.
+ * Created by beasontk on 2016/8/9.
  */
 class OnlyWebActivity : tk.beason.common.app.activity.BaseActivity() {
 

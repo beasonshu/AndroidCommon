@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017. The yuhaiyang Android Source Project
+ * Copyright (C) 2017. The beasontk Android Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ import android.view.animation.LayoutAnimationController;
 import tk.beason.common.R;
 
 /**
- * Created by yuhaiyang on 2017/6/1.
+ * Created by beasontk on 2017/6/1.
  * 带有动画的RecycleView
  */
 

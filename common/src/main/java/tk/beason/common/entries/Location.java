@@ -3,7 +3,7 @@ package tk.beason.common.entries;
 import com.baidu.location.Address;
 
 /**
- * Created by yuhaiyang on 2018/6/22.
+ * Created by beasontk on 2018/6/22.
  * 定位信息
  */
 public class Location {

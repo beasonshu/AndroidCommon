@@ -12,7 +12,7 @@ import tk.beason.noah.modules.settings.SettingsActivity
 import kotlinx.android.synthetic.main.fragement_mine.*
 
 /**
- * Created by yuhaiyang on 2017/4/21.
+ * Created by beasontk on 2017/4/21.
  * Home Fragment
  */
 

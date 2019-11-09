@@ -13,7 +13,7 @@ import tk.beason.noah.modules.base.AppBaseActivity
 import kotlinx.android.synthetic.main.activity_modify_user_info.*
 
 /**
- * Created by yuhaiyang on 2018/8/8.
+ * Created by beasontk on 2018/8/8.
  * 修改用户信息
  */
 class ModifyUserInfoActivity : tk.beason.noah.modules.base.AppBaseActivity(),

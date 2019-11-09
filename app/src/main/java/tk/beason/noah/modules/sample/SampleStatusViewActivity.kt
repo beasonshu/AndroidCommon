@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.activity_sample_status_view.*
 import tk.beason.noah.modules.base.AppBaseActivity
 
 /**
-* Created by yuhaiyang on 2018-10-29.
+* Created by beasontk on 2018-10-29.
 * StatusView
 */
 class SampleStatusViewActivity : AppBaseActivity(), View.OnClickListener, StatusView.OnStatusViewListener {

@@ -11,7 +11,7 @@ import tk.beason.common.utils.permission.PermissionManager
 import tk.beason.noah.utils.http.AppHttpCallBack
 
 /**
- * Created by yuhaiyang on 2018/3/27.
+ * Created by beasontk on 2018/3/27.
  * Presenter
  */
 

@@ -12,7 +12,7 @@ import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 
 /**
- * Created by yuhaiyang on 2017/5/2.
+ * Created by beasontk on 2017/5/2.
  * 对应项目的处理
  */
 
