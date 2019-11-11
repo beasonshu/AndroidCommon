@@ -243,8 +243,7 @@ public class VerifyCodeButton extends FrameLayout implements LifecycleObserver{
 
             @Override
             public void onFinish() {
-                setEnabled(true);
-                mCountDownTimer = null;
+                reset();
                 mDisplayView.setText(mTextStr);
                 if (mOnCountDownFinishListener != null) {
                     mOnCountDownFinishListener.onFinish();
