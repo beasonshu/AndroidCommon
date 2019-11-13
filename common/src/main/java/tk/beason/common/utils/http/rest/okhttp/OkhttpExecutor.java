@@ -36,9 +36,17 @@ import tk.beason.common.utils.log.LogManager;
 
 import java.io.File;
 import java.io.IOException;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -56,6 +64,36 @@ public class OkhttpExecutor extends Executor {
     private static final String TAG = "OkhttpExecutor";
     private OkHttpClient mOkHttpClient;
     private OkCookiesManager mCookiesManager;
+    private static SSLContext sslContext;
+    static {
+        TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
+            @Override
+            public void checkClientTrusted(
+                    java.security.cert.X509Certificate[] chain,
+                    String authType)  {
+            }
+
+            @Override
+            public void checkServerTrusted(
+                    java.security.cert.X509Certificate[] chain,
+                    String authType)  {
+            }
+
+            @Override
+            public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+                return new X509Certificate[0];
+            }
+        }};
+        try {
+            sslContext = SSLContext.getInstance("SSL");
+            sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (KeyManagementException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     @Override
     public void init(Context context) {
@@ -70,6 +108,7 @@ public class OkhttpExecutor extends Executor {
         mCookiesManager = new OkCookiesManager(context, config.getCookieType());
         builder.cookieJar(mCookiesManager);
         mOkHttpClient = builder.build();
+
     }
 
 

@@ -21,7 +21,7 @@ import androidx.annotation.NonNull;
 import tk.beason.common.utils.http.rest.HttpError;
 
 /**
- * Created by beasontk on 2017/5/2.
+ *
  * HttpError
  */
 
