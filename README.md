@@ -5,12 +5,12 @@ AndroidCommon是一个项目的基础框架，里面包含了常用的工具类�
 
 # JCenter
 ```
-api 'tk.beason:common:1.0.11'
+api 'tk.beason:common:1.0.12'
 ```
 
 
 # 更新记录
-### 1.0.11
+### 1.0.12
 - 解决ssl证书过期或者私有证书
 ### 1.0.3
 - 修改验证码倒计时
