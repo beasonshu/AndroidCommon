@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The beasontk Android Source Project
+ * Copyright (C) 2016 The beason Android Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,35 +16,9 @@
 
 package tk.beason.common.utils.http.rest.okhttp;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-
 import androidx.annotation.NonNull;
 
-import java.io.File;
-import java.io.IOException;
-import java.security.KeyManagementException;
-import java.security.NoSuchAlgorithmException;
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
-
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSession;
-import javax.net.ssl.SSLSocketFactory;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.FormBody;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
-import okhttp3.RequestBody;
 import tk.beason.common.entries.KeyValue;
 import tk.beason.common.utils.http.rest.Headers;
 import tk.beason.common.utils.http.rest.Http;
@@ -60,6 +34,27 @@ import tk.beason.common.utils.http.rest.request.Request;
 import tk.beason.common.utils.http.rest.response.Response;
 import tk.beason.common.utils.log.LogManager;
 
+import java.io.File;
+import java.io.IOException;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.X509Certificate;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
+
 /**
  * Created by Bright.Yu on 2017/2/20.
  * Okhttp的请求
@@ -69,32 +64,18 @@ public class OkhttpExecutor extends Executor {
     private OkHttpClient mOkHttpClient;
     private OkCookiesManager mCookiesManager;
 
-    @Override
-    public void init(Context context) {
-        OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        HttpConfig config = Http.getConfig();
-
-        // Step 1. 设置超时时间
-        builder.connectTimeout(config.getConnTimeOut(), TimeUnit.MILLISECONDS);
-        builder.readTimeout(config.getReadTimeOut(), TimeUnit.MILLISECONDS);
-        builder.writeTimeout(config.getWriteTimeOut(), TimeUnit.MILLISECONDS);
-        // Step 2. 设置Cookie
-        mCookiesManager = new OkCookiesManager(context, config.getCookieType());
-        builder.cookieJar(mCookiesManager);
-
-        final TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
-            @SuppressLint("TrustAllX509TrustManager")
+    static {
+        TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
             @Override
             public void checkClientTrusted(
                     java.security.cert.X509Certificate[] chain,
-                    String authType) throws CertificateException {
+                    String authType)  {
             }
 
-            @SuppressLint("TrustAllX509TrustManager")
             @Override
             public void checkServerTrusted(
                     java.security.cert.X509Certificate[] chain,
-                    String authType) throws CertificateException {
+                    String authType)  {
             }
 
             @Override
@@ -102,28 +83,28 @@ public class OkhttpExecutor extends Executor {
                 return new X509Certificate[0];
             }
         }};
-
-        // Install the all-trusting trust manager
-        SSLContext sslContext = null;
         try {
-            sslContext = SSLContext.getInstance("SSL");
+            SSLContext sslContext = SSLContext.getInstance("SSL");
             sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
         } catch (NoSuchAlgorithmException | KeyManagementException e) {
             e.printStackTrace();
         }
 
-        assert sslContext != null;
-        mOkHttpClient = builder.build().newBuilder().sslSocketFactory(
-                sslContext.getSocketFactory())
-                .hostnameVerifier(new HostnameVerifier() {
-                    @SuppressLint("BadHostnameVerifier")
-                    @Override
-                    public boolean verify(String hostname, SSLSession session) {
-                        return true;
-                    }
-                })
-                .build();
+    }
 
+    @Override
+    public void init(Context context) {
+        HttpConfig config = Http.getConfig();
+
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        // Step 1. 设置超时时间
+        builder.connectTimeout(config.getConnTimeOut(), TimeUnit.MILLISECONDS);
+        builder.readTimeout(config.getReadTimeOut(), TimeUnit.MILLISECONDS);
+        builder.writeTimeout(config.getWriteTimeOut(), TimeUnit.MILLISECONDS);
+        // Step 2. 设置Cookie
+        mCookiesManager = new OkCookiesManager(context, config.getCookieType());
+        builder.cookieJar(mCookiesManager);
+        mOkHttpClient = builder.build();
 
     }
 
@@ -182,7 +163,16 @@ public class OkhttpExecutor extends Executor {
                                    final CallBack<T> callBack) {
         Call call;
 
-        call = mOkHttpClient.newCall(okHttpRequest);
+        if (request.isChangedTimeOut()) {
+            OkHttpClient client = mOkHttpClient.newBuilder()
+                    .readTimeout(request.getReadTimeOut(true), TimeUnit.MILLISECONDS)
+                    .writeTimeout(request.getWriteTimeOut(true), TimeUnit.MILLISECONDS)
+                    .connectTimeout(request.getConnTimeOut(true), TimeUnit.MILLISECONDS)
+                    .build();
+            call = client.newCall(okHttpRequest);
+        } else {
+            call = mOkHttpClient.newCall(okHttpRequest);
+        }
 
         call.enqueue(new Callback() {
             @Override
