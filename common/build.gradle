@@ -99,7 +99,7 @@ publish {
     userOrg = 'beasonshu'//bintray.com用户名
     groupId = 'tk.beason'//jcenter上的路径
     artifactId = 'common'//项目名称
-    publishVersion = "1.0.16"//版本号
+    publishVersion = "1.0.17"//版本号
     desc = 'common'
     website = 'https://github.com/beasonshu/AndroidCommon'
 }
