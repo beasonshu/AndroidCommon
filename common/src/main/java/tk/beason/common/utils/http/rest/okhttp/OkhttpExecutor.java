@@ -17,8 +17,30 @@
 package tk.beason.common.utils.http.rest.okhttp;
 
 import android.content.Context;
+
 import androidx.annotation.NonNull;
 
+import java.io.File;
+import java.io.IOException;
+import java.security.cert.CertificateException;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
 import tk.beason.common.entries.KeyValue;
 import tk.beason.common.utils.http.rest.Headers;
 import tk.beason.common.utils.http.rest.Http;
@@ -34,28 +56,6 @@ import tk.beason.common.utils.http.rest.request.Request;
 import tk.beason.common.utils.http.rest.response.Response;
 import tk.beason.common.utils.log.LogManager;
 
-import java.io.File;
-import java.io.IOException;
-import java.security.KeyManagementException;
-import java.security.NoSuchAlgorithmException;
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
-
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.FormBody;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
-import okhttp3.RequestBody;
-
 /**
  * Created by Bright.Yu on 2017/2/20.
  * Okhttp的请求
@@ -64,42 +64,50 @@ public class OkhttpExecutor extends Executor {
     private static final String TAG = "OkhttpExecutor";
     private OkHttpClient mOkHttpClient;
     private OkCookiesManager mCookiesManager;
-    private static SSLContext sslContext;
-    static {
-        TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
-            @Override
-            public void checkClientTrusted(
-                    java.security.cert.X509Certificate[] chain,
-                    String authType)  {
-            }
-
-            @Override
-            public void checkServerTrusted(
-                    java.security.cert.X509Certificate[] chain,
-                    String authType)  {
-            }
-
-            @Override
-            public java.security.cert.X509Certificate[] getAcceptedIssuers() {
-                return new X509Certificate[0];
-            }
-        }};
-        try {
-            sslContext = SSLContext.getInstance("SSL");
-            sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (KeyManagementException e) {
-            e.printStackTrace();
-        }
-
-    }
 
     @Override
     public void init(Context context) {
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        try {
+            // Create a trust manager that does not validate certificate chains
+            final TrustManager[] trustAllCerts = new TrustManager[]{
+                    new X509TrustManager() {
+                        @Override
+                        public void checkClientTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
+                        }
+
+                        @Override
+                        public void checkServerTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
+                        }
+
+                        @Override
+                        public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+                            return new java.security.cert.X509Certificate[]{};
+                        }
+                    }
+            };
+
+            // Install the all-trusting trust manager
+            final SSLContext sslContext = SSLContext.getInstance("SSL");
+            sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
+
+            // Create an ssl socket factory with our all-trusting manager
+            final SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
+
+
+            builder.sslSocketFactory(sslSocketFactory, (X509TrustManager) trustAllCerts[0]);
+            builder.hostnameVerifier(new HostnameVerifier() {
+                @Override
+                public boolean verify(String hostname, SSLSession session) {
+                    return true;
+                }
+            });
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         HttpConfig config = Http.getConfig();
 
-        OkHttpClient.Builder builder = new OkHttpClient.Builder();
         // Step 1. 设置超时时间
         builder.connectTimeout(config.getConnTimeOut(), TimeUnit.MILLISECONDS);
         builder.readTimeout(config.getReadTimeOut(), TimeUnit.MILLISECONDS);
@@ -108,6 +116,7 @@ public class OkhttpExecutor extends Executor {
         mCookiesManager = new OkCookiesManager(context, config.getCookieType());
         builder.cookieJar(mCookiesManager);
         mOkHttpClient = builder.build();
+
 
     }
 
