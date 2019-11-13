@@ -136,10 +136,7 @@
         <activity
             android:name="tk.beason.noah.modules.sample.webview.loading.SampleLoadingWebViewActivity"
             android:screenOrientation="portrait" />
-        <!--PullToRefresh-->
-        <activity
-            android:name="tk.beason.noah.modules.sample.pulltorefresh.SamplePullToRefreshActivity"
-            android:screenOrientation="portrait" />
+
         <!--BaseDialog-->
         <activity
             android:name=".modules.sample.dialog.normal.SampleBaseDialogActivity"

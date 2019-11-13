@@ -175,16 +175,7 @@ public class OkhttpExecutor extends Executor {
                                    final CallBack<T> callBack) {
         Call call;
 
-        if (request.isChangedTimeOut()) {
-            OkHttpClient client = mOkHttpClient.newBuilder()
-                    .readTimeout(request.getReadTimeOut(true), TimeUnit.MILLISECONDS)
-                    .writeTimeout(request.getWriteTimeOut(true), TimeUnit.MILLISECONDS)
-                    .connectTimeout(request.getConnTimeOut(true), TimeUnit.MILLISECONDS)
-                    .build();
-            call = client.newCall(okHttpRequest);
-        } else {
-            call = mOkHttpClient.newCall(okHttpRequest);
-        }
+        call = mOkHttpClient.newCall(okHttpRequest);
 
         call.enqueue(new Callback() {
             @Override
