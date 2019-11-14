@@ -1,4 +1,6 @@
 # 更新记录
+### 1.0.13
+- 增加环境切换 参见[EnvVariable](https://github.com/twiceyuan/EnvVariable)
 ### 1.0.12
 - 解决ssl证书过期或者私有证书
 ### 1.0.3
