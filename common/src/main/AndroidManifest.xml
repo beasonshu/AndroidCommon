@@ -45,6 +45,11 @@
             android:name=".modules.image.cutter.PhotoCutterActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.NoActionBar.Fullscreen"/>
+        <activity
+            android:name=".env.ui.ConfigActivity"
+            android:label="环境变量配置"
+            android:theme="@style/env_var_AppTheme"
+            android:windowSoftInputMode="adjustPan" />
 
     </application>
 
