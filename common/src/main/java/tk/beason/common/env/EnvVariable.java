@@ -43,7 +43,7 @@ public class EnvVariable {
         });
     }
 
-    private static Variable getEnvVariableByAnnotation(Context context, VariableProp variableAnnotation) throws Exception {
+    private static Variable getEnvVariableByAnnotation(Context context, VariableProp variableAnnotation)  {
         String name = variableAnnotation.name();
 
         // 1. 内存中有优先使用内存的
@@ -136,21 +136,34 @@ public class EnvVariable {
     /**
      * 生成默认环境变量
      */
-    private static Variable generateVariableByDefault(VariableProp variable) throws Exception {
+    private static Variable generateVariableByDefault(VariableProp variable)  {
         Variable newVariable = new Variable();
 
         newVariable.name = variable.name();
         newVariable.desc = variable.desc();
 
         Class<? extends Variable.DefaultItemProvider> defaultProviderClass = variable.defaultValue();
-        Class<? extends Variable.Item> defaultVariableClass = getDefaultVariableClass(defaultProviderClass);
+        Class<? extends Variable.Item> defaultVariableClass = null;
+        try {
+            defaultVariableClass = getDefaultVariableClass(defaultProviderClass);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        newVariable.currentValue = getValueByConstant(defaultVariableClass);
+        try {
+            newVariable.currentValue = getValueByConstant(defaultVariableClass);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         Class<? extends Variable.Item>[] selectionClasses = variable.selections();
         newVariable.selections = new ArrayList<>();
         for (Class<? extends Variable.Item> selectionClass : selectionClasses) {
-            newVariable.selections.add(getValueByConstant(selectionClass));
+            try {
+                newVariable.selections.add(getValueByConstant(selectionClass));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         return newVariable;
     }
