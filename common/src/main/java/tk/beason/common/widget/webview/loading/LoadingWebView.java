@@ -17,9 +17,11 @@
 package tk.beason.common.widget.webview.loading;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
@@ -35,18 +37,23 @@ public class LoadingWebView extends WebView {
     private int mLoadingHeight;
 
     public LoadingWebView(Context context) {
-        super(context);
+        super(getFixedContext(context));
         init(context, null);
     }
 
     public LoadingWebView(Context context, AttributeSet attrs) {
-        super(context, attrs);
+        super(getFixedContext(context), attrs);
         init(context, attrs);
     }
 
     public LoadingWebView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
+        super(getFixedContext(context), attrs, defStyleAttr);
         init(context, attrs);
+    }
+    private static Context getFixedContext(Context context) {
+        if (Build.VERSION.SDK_INT >= 21 && Build.VERSION.SDK_INT < 23) // Android Lollipop 5.0 & 5.1
+            return context.createConfigurationContext(new Configuration());
+        return context;
     }
 
     private void init(Context context, AttributeSet attrs) {
