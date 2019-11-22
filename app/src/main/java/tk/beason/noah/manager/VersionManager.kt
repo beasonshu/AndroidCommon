@@ -25,6 +25,7 @@ import tk.beason.common.utils.StorageUtils
 import tk.beason.common.utils.http.rest.Http
 import tk.beason.common.utils.http.rest.HttpError
 import tk.beason.common.utils.log.LogManager
+import tk.beason.noah.entries.Version
 import tk.beason.noah.modules.init.splash.SplashActivity
 import tk.beason.noah.utils.http.AppHttpCallBack
 
@@ -36,12 +37,11 @@ class VersionManager private constructor() {
     /**
      * 从服务器中获取到的版本信息
      */
-    private var mVersion: tk.beason.noah.entries.Version? = null
+    private var mVersion: Version? = null
 
     fun init(context: SplashActivity) {
-        tk.beason.noah.manager.VersionManager.Companion.clear(context.applicationContext)
-        tk.beason.noah.manager.VersionManager.Companion.isFirstEnterThisVersion =
-            tk.beason.noah.manager.VersionManager.Companion.checkIsFirstEnterThisVerison(context.applicationContext)
+        clear(context.applicationContext)
+        isFirstEnterThisVersion = checkIsFirstEnterThisVerison(context.applicationContext)
         getVersionFromServer(context.applicationContext)
         cleanCache(context)
     }
@@ -49,25 +49,25 @@ class VersionManager private constructor() {
 
     fun hasNewVersion(context: Context): Boolean {
         val ignore = StorageUtils.with(context)
-                .key(tk.beason.noah.entries.Version.Key.IGNORE_NOW)
+                .key(Version.Key.IGNORE_NOW)
                 .get(false)!!
 
         if (ignore) {
-            Log.i(tk.beason.noah.manager.VersionManager.Companion.TAG, "hasNewVersion: already ignore")
+            Log.i(TAG, "hasNewVersion: already ignore")
             return false
         }
 
         // 获取当前版本号
         val version = getVersion(context)
         if (version == null) {
-            Log.i(tk.beason.noah.manager.VersionManager.Companion.TAG, "hasNewVersion: version is null")
+            Log.i(TAG, "hasNewVersion: version is null")
             return false
         }
 
         // 如果当前要升级的版本 比忽略的版本还要低就不进行升级
         val ignoreVersion = getIgnoreVersion(context)
         if (ignoreVersion != null && ignoreVersion.versionCode >= version.versionCode) {
-            Log.i(tk.beason.noah.manager.VersionManager.Companion.TAG, "hasNewVersion: ignore this version")
+            Log.i(TAG, "hasNewVersion: ignore this version")
             return false
         }
 
@@ -75,10 +75,10 @@ class VersionManager private constructor() {
         return version.versionCode > versionCode
     }
 
-    fun getVersion(context: Context): tk.beason.noah.entries.Version? {
+    fun getVersion(context: Context): Version? {
         if (mVersion == null) {
             val cache = StorageUtils.with(context)
-                    .key(tk.beason.noah.entries.Version.Key.CACHE)
+                    .key(Version.Key.CACHE)
                     .get<String>(null)
             makeVersion(cache)
         }
@@ -86,30 +86,30 @@ class VersionManager private constructor() {
     }
 
 
-    private fun getIgnoreVersion(context: Context): tk.beason.noah.entries.Version? {
+    private fun getIgnoreVersion(context: Context): Version? {
         val cache = StorageUtils.with(context)
-                .key(tk.beason.noah.entries.Version.Key.IGNORE_VERSION)
+                .key(Version.Key.IGNORE_VERSION)
                 .get<String>(null)
         return if (TextUtils.isEmpty(cache)) {
             null
         } else {
-            JSON.parseObject(cache, tk.beason.noah.entries.Version::class.java)
+            JSON.parseObject(cache, Version::class.java)
         }
     }
 
     private fun makeVersion(versionJson: String?) {
         if (TextUtils.isEmpty(versionJson)) {
-            LogManager.i(tk.beason.noah.manager.VersionManager.Companion.TAG, "makeVersion: version is empty")
+            LogManager.i(TAG, "makeVersion: version is empty")
             return
         }
-        mVersion = JSON.parseObject(versionJson, tk.beason.noah.entries.Version::class.java)
+        mVersion = JSON.parseObject(versionJson, Version::class.java)
     }
 
     /**
      * 获取版本信息
      */
     private fun getVersionFromServer(context: Context) {
-        val version = tk.beason.noah.entries.Version()
+        val version = Version()
         version.versionCode = tk.beason.noah.BuildConfig.VERSION_CODE
         version.versionName = tk.beason.noah.BuildConfig.VERSION_NAME
 
@@ -123,17 +123,17 @@ class VersionManager private constructor() {
 
                     override fun onSuccess(result: String) {
                         val cache = StorageUtils.with(context)
-                                .key(tk.beason.noah.entries.Version.Key.CACHE)
+                                .key(Version.Key.CACHE)
                                 .get<String>(null)
 
                         if (!TextUtils.equals(cache, result)) {
                             StorageUtils.with(context)
-                                    .key(tk.beason.noah.entries.Version.Key.IGNORE_VERSION)
+                                    .key(Version.Key.IGNORE_VERSION)
                                     .remove()
                         }
 
                         StorageUtils.with(context)
-                                .param(tk.beason.noah.entries.Version.Key.CACHE, result)
+                                .param(Version.Key.CACHE, result)
                                 .save()
                         makeVersion(result)
                     }
@@ -141,7 +141,7 @@ class VersionManager private constructor() {
     }
 
     private fun cleanCache(context: Context) {
-        if (!tk.beason.noah.manager.VersionManager.Companion.isFirstEnterThisVersion) {
+        if (!isFirstEnterThisVersion) {
             return
         }
         tk.beason.noah.manager.CacheManager.Companion.instance!!.clearCache(context)
@@ -163,16 +163,16 @@ class VersionManager private constructor() {
         val instance: tk.beason.noah.manager.VersionManager
             get() {
 
-                if (tk.beason.noah.manager.VersionManager.Companion.sInstance == null) {
+                if (sInstance == null) {
                     synchronized(tk.beason.noah.manager.VersionManager::class.java) {
-                        if (tk.beason.noah.manager.VersionManager.Companion.sInstance == null) {
-                            tk.beason.noah.manager.VersionManager.Companion.sInstance =
+                        if (sInstance == null) {
+                            sInstance =
                                 tk.beason.noah.manager.VersionManager()
                         }
                     }
                 }
 
-                return tk.beason.noah.manager.VersionManager.Companion.sInstance!!
+                return sInstance!!
             }
 
         /**
@@ -191,8 +191,8 @@ class VersionManager private constructor() {
             // 获取当前版本号
             val _versionCode = AppUtils.getVersionCode(context)
             val _versionName = AppUtils.getVersionName(context)
-            Log.d(tk.beason.noah.manager.VersionManager.Companion.TAG, "originVersion = $versionCode ,localVersion = $_versionCode")
-            Log.d(tk.beason.noah.manager.VersionManager.Companion.TAG, "originVersionName = $versionName ,localVersionName = $_versionName")
+            Log.d(TAG, "originVersion = $versionCode ,localVersion = $_versionCode")
+            Log.d(TAG, "originVersionName = $versionName ,localVersionName = $_versionName")
 
             // 保存现在的版本号
             StorageUtils.with(context)
@@ -213,10 +213,10 @@ class VersionManager private constructor() {
          */
         private fun clear(context: Context) {
             StorageUtils.with(context)
-                    .key(tk.beason.noah.entries.Version.Key.CACHE)
+                    .key(Version.Key.CACHE)
                     .remove()
             StorageUtils.with(context)
-                    .key(tk.beason.noah.entries.Version.Key.IGNORE_NOW)
+                    .key(Version.Key.IGNORE_NOW)
                     .remove()
         }
     }

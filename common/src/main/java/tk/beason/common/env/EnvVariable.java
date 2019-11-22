@@ -2,14 +2,12 @@ package tk.beason.common.env;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.util.Log;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
@@ -20,6 +18,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import tk.beason.common.env.annotation.VariableProp;
 import tk.beason.common.env.model.Variable;
 import tk.beason.common.env.ui.ConfigActivity;
+import tk.beason.common.utils.StorageUtils;
 
 public class EnvVariable {
 
@@ -54,7 +53,7 @@ public class EnvVariable {
         }
 
         // 2. 判断外存中是否有，有的话取外存并缓存到内存中
-        Variable diskCachedVariable = readFromDisk(context, name);
+        Variable diskCachedVariable = readFromPrefrence(context);
         if (diskCachedVariable != null) {
             cache.put(name, diskCachedVariable);
             return diskCachedVariable;
@@ -90,18 +89,14 @@ public class EnvVariable {
     /**
      * 从 Disk 读取变量
      */
-    private static Variable readFromDisk(Context context, String name) {
-        try {
-            File cacheDir = new File(context.getCacheDir(), CACHE_PATH);
-            if (!cacheDir.exists()) {
-                //noinspection ResultOfMethodCallIgnored
-                cacheDir.mkdirs();
-            }
-            File cacheFile = new File(cacheDir, name);
-            return (Variable) new ObjectInputStream(new FileInputStream(cacheFile)).readObject();
-        } catch (Exception e) {
-            Log.e(TAG, e.getMessage(), e);
-            return null;
+    private static Variable readFromPrefrence(Context context) {
+        String cache = StorageUtils.with(context)
+                .key(CACHE_PATH).get(null);
+         if (TextUtils.isEmpty(cache)) {
+           return null;
+        } else {
+
+            return JSONObject.parseObject(cache, Variable.class);
         }
     }
 
@@ -109,19 +104,9 @@ public class EnvVariable {
      * 保存一个环境变量到 Disk
      */
     private static void saveToDisk(Context context, Variable variable) {
-        try {
-            File cacheDir = new File(context.getCacheDir(), CACHE_PATH);
-            if (!cacheDir.exists()) {
-                boolean mkResult = cacheDir.mkdirs();
-                if (!mkResult) {
-                    Log.e(TAG, "cacheDir.mkdirs() failed: " + cacheDir.getAbsolutePath());
-                }
-            }
-            File cacheFile = new File(cacheDir, variable.name);
-            new ObjectOutputStream(new FileOutputStream(cacheFile)).writeObject(variable);
-        } catch (Exception e) {
-            Log.e(TAG, e.getMessage(), e);
-        }
+        StorageUtils.with(context)
+                .param(CACHE_PATH, JSON.toJSONString(variable))
+                .save();
     }
 
     /**

@@ -23,22 +23,19 @@ import tk.beason.common.utils.StorageUtils
 import tk.beason.common.utils.StringUtils
 import tk.beason.common.utils.http.rest.Http
 import tk.beason.common.utils.http.rest.HttpError
-import tk.beason.noah.constant.Configure
-import tk.beason.noah.constant.Url
 import tk.beason.noah.entries.UserContainer
-import tk.beason.noah.manager.UserManager
 import tk.beason.noah.utils.http.AppHttpCallBack
 
 /**
  * Created by beasontk on 2018/8/8.
  * 登录的Presenter
  */
-internal class LoginPresenter(private val mView: tk.beason.noah.modules.account.login.LoginContract.View) :
-    tk.beason.noah.modules.account.login.LoginContract.Presenter {
+internal class LoginPresenter(private val mView: LoginContract.View) :
+    LoginContract.Presenter {
 
     override fun init() {
         val account = StorageUtils.with(mView.context)
-                .key(tk.beason.noah.entries.UserContainer.Key.ACCOUNT)
+                .key(UserContainer.Key.ACCOUNT)
                 .get(StringUtils.EMPTY)
 
         mView.updateUI(account)

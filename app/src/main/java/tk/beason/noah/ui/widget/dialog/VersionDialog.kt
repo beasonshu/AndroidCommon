@@ -26,10 +26,10 @@ import tk.beason.common.utils.DeviceUtils
 import tk.beason.common.utils.IntentUtils
 import tk.beason.common.utils.StorageUtils
 import tk.beason.common.utils.log.LogManager
-import tk.beason.noah.entries.Version
-import tk.beason.noah.manager.VersionManager
 import kotlinx.android.synthetic.main.dialog_version.*
 import tk.beason.noah.R
+import tk.beason.noah.entries.Version
+import tk.beason.noah.manager.VersionManager
 
 /**
  * Created by beasontk on 2017/8/1.
@@ -93,7 +93,7 @@ class VersionDialog(context: Context) : Dialog(context, R.style.Theme_Dialog_Tra
                 dismiss()
             }
             R.id.submit -> {
-                val version = tk.beason.noah.manager.VersionManager.instance.getVersion(context)
+                val version = VersionManager.instance.getVersion(context)
                 IntentUtils.goToBrowser(context, version?.downloadPath)
                 dismiss()
             }
@@ -113,14 +113,14 @@ class VersionDialog(context: Context) : Dialog(context, R.style.Theme_Dialog_Tra
             return
         }
 
-        val version = tk.beason.noah.manager.VersionManager.instance.getVersion(context)
+        val version = VersionManager.instance.getVersion(context)
         if (version == null) {
             Log.i(TAG, "init: version is null")
             return
         }
 
         StorageUtils.with(context)
-                .param(tk.beason.noah.entries.Version.Key.IGNORE_VERSION, JSON.toJSONString(version))
+                .param(Version.Key.IGNORE_VERSION, JSON.toJSONString(version))
                 .save()
     }
 
