@@ -1,14 +1,15 @@
 package tk.beason.noah.entries
 
 import tk.beason.common.env.annotation.VariableProp
+import tk.beason.common.env.model.Item
 import tk.beason.common.env.model.Variable
 import tk.beason.noah.BuildConfig
 
 interface EnvConfig {
 
     class FruitServer {
-        class Debug : Variable.Item("调试", "https://fruit1.com", true)
-        class Release : Variable.Item("生产", "https://fruit2.com")
+        class Debug : Item("调试", "https://fruit1.com", true)
+        class Release : Item("生产", "https://fruit2.com")
 
         class Default : Variable.DefaultItemProvider {
             override fun provide() = if (BuildConfig.DEBUG) {
@@ -27,8 +28,8 @@ interface EnvConfig {
     fun fruitServer(): Variable
 
     class AnimalServer {
-        class Debug : Variable.Item("调试", "https://animal1.com", true)
-        class Release : Variable.Item("生产", "https://animal2.com")
+        class Debug : Item("调试", "https://animal1.com", true)
+        class Release : Item("生产", "https://animal2.com")
 
         class Default : Variable.DefaultItemProvider {
             override fun provide() = Release::class.java

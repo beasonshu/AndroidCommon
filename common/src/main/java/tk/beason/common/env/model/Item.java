@@ -1,8 +1,8 @@
 package tk.beason.common.env.model;
 
 public class Item {
-    public final String name;
-    public final boolean isEditable;
+    public String name;
+    public boolean isEditable;
     public String value;
 
     public Item(){
