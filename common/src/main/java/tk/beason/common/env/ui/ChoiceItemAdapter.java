@@ -12,24 +12,23 @@ import android.widget.TextView;
 
 import androidx.appcompat.widget.AppCompatImageView;
 
-
 import java.util.List;
 
 import tk.beason.common.R;
-import tk.beason.common.env.model.Variable;
+import tk.beason.common.env.model.Item;
 
 public class ChoiceItemAdapter extends BaseAdapter {
 
     private static final String TAG = "ChoiceItemAdapter";
 
-    private final List<Variable.Item> selections;
+    private final List<Item> selections;
     private int selectionPosition;
 
     private SparseBooleanArray editModeMap = new SparseBooleanArray();
 
     private OnItemClickListener itemChoiceListener;
 
-    ChoiceItemAdapter(List<Variable.Item> selections, int selectionPosition) {
+    ChoiceItemAdapter(List<Item> selections, int selectionPosition) {
         this.selections = selections;
         this.selectionPosition = selectionPosition;
         disableAllEditor();
@@ -47,13 +46,13 @@ public class ChoiceItemAdapter extends BaseAdapter {
     }
 
     @Override
-    public Variable.Item getItem(int position) {
+    public Item getItem(int position) {
         return selections.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        Variable.Item item = getItem(position);
+        Item item = getItem(position);
         return (item.value + editModeMap.get(position)).hashCode();
     }
 
@@ -68,7 +67,7 @@ public class ChoiceItemAdapter extends BaseAdapter {
             holder = (Holder) convertView.getTag();
         }
 
-        Variable.Item item = selections.get(position);
+        Item item = selections.get(position);
         holder.name.setText(item.name);
         holder.editText.setText(item.value);
 
@@ -100,7 +99,7 @@ public class ChoiceItemAdapter extends BaseAdapter {
         return convertView;
     }
 
-    private void setupEditor(Holder holder, int position, Variable.Item item) {
+    private void setupEditor(Holder holder, int position, Item item) {
         if (!item.isEditable) {
             holder.iconEdit.setVisibility(View.INVISIBLE);
             toggleEditor(holder.editText, false);
@@ -147,7 +146,7 @@ public class ChoiceItemAdapter extends BaseAdapter {
     }
 
     public interface OnItemClickListener {
-        void onClick(int position, Variable.Item item);
+        void onClick(int position, Item item);
     }
 
     public void setItemChoiceListener(OnItemClickListener itemChoiceListener) {
