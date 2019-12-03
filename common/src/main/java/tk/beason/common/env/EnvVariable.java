@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import tk.beason.common.env.annotation.VariableProp;
+import tk.beason.common.env.model.Item;
 import tk.beason.common.env.model.Variable;
 import tk.beason.common.env.ui.ConfigActivity;
 import tk.beason.common.utils.StorageUtils;
@@ -128,7 +129,7 @@ public class EnvVariable {
         newVariable.desc = variable.desc();
 
         Class<? extends Variable.DefaultItemProvider> defaultProviderClass = variable.defaultValue();
-        Class<? extends Variable.Item> defaultVariableClass = null;
+        Class<? extends Item> defaultVariableClass = null;
         try {
             defaultVariableClass = getDefaultVariableClass(defaultProviderClass);
         } catch (Exception e) {
@@ -141,9 +142,9 @@ public class EnvVariable {
             e.printStackTrace();
         }
 
-        Class<? extends Variable.Item>[] selectionClasses = variable.selections();
+        Class<? extends Item>[] selectionClasses = variable.selections();
         newVariable.selections = new ArrayList<>();
-        for (Class<? extends Variable.Item> selectionClass : selectionClasses) {
+        for (Class<? extends Item> selectionClass : selectionClasses) {
             try {
                 newVariable.selections.add(getValueByConstant(selectionClass));
             } catch (Exception e) {
@@ -156,7 +157,7 @@ public class EnvVariable {
     /**
      * 根据默认值提供者获取默认值
      */
-    private static Class<? extends Variable.Item> getDefaultVariableClass(
+    private static Class<? extends Item> getDefaultVariableClass(
             Class<? extends Variable.DefaultItemProvider> providerClass
     ) throws Exception {
         Variable.DefaultItemProvider provider = providerClass.newInstance();
@@ -166,14 +167,14 @@ public class EnvVariable {
     /**
      * 获取常量值
      */
-    private static Variable.Item getValueByConstant(
-            Class<? extends Variable.Item> constantClass
+    private static Item getValueByConstant(
+            Class<? extends Item> constantClass
     ) throws Exception {
-        Variable.Item instance = constantClass.newInstance();
+        Item instance = constantClass.newInstance();
         final String name = instance.name;
         final String value = instance.value;
         final boolean isEditable = instance.isEditable;
-        return new Variable.Item(name, value, isEditable);
+        return new Item(name, value, isEditable);
     }
 
     /**
