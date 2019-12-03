@@ -18,6 +18,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import tk.beason.common.R;
 import tk.beason.common.env.EnvVariable;
+import tk.beason.common.env.model.Item;
 import tk.beason.common.env.model.Variable;
 
 public class ConfigActivity extends AppCompatActivity {
@@ -47,7 +48,7 @@ public class ConfigActivity extends AppCompatActivity {
     private void showChoiceDialog(final Context context, final Variable variable, final Runnable afterChoiceAction) {
         AtomicInteger checkedPosition = new AtomicInteger(0);
         for (int i = 0; i < variable.selections.size(); i++) {
-            Variable.Item item = variable.selections.get(i);
+            Item item = variable.selections.get(i);
             if (item.value.equals(variable.getValue())) {
                 checkedPosition.set(i);
             }
