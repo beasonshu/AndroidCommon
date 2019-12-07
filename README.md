@@ -11,7 +11,7 @@ api 'tk.beason:common:1.0.16'
 
 # 更新记录
 ### 1.0.16
-- 增加环境切换 默认存储使用SharePreference
+- 增加环境切换 默认存储使用SharePreference replace 序列化
 ### 1.0.13
 - 增加环境切换 参见[EnvVariable](https://github.com/twiceyuan/EnvVariable)
 ### 1.0.12
