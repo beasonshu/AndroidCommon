@@ -5,11 +5,13 @@ AndroidCommon是一个项目的基础框架，里面包含了常用的工具类�
 
 # JCenter
 ```
-api 'tk.beason:common:1.0.13'
+api 'tk.beason:common:1.0.16'
 ```
 
 
 # 更新记录
+### 1.0.16
+- 增加环境切换 默认存储使用SharePreference
 ### 1.0.13
 - 增加环境切换 参见[EnvVariable](https://github.com/twiceyuan/EnvVariable)
 ### 1.0.12
