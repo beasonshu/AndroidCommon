@@ -2,13 +2,13 @@ buildscript {
     repositories {
         google()
         mavenCentral()
-        maven{ url 'https://maven.aliyun.com/nexus/content/groups/public/'}
+//        maven{ url 'https://maven.aliyun.com/nexus/content/groups/public/'}
         maven { url 'https://jitpack.io' }
     }
 
     dependencies {
         //  Android 默认的编译工具库插件
-        classpath 'com.android.tools.build:gradle:3.5.4'
+        classpath 'com.android.tools.build:gradle:4.2.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$KOTLIN_VERSION"
         // 上传的插件
     }
@@ -18,7 +18,7 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        maven{ url 'https://maven.aliyun.com/nexus/content/groups/public/'}
+//        maven{ url 'https://maven.aliyun.com/nexus/content/groups/public/'}
         maven { url 'https://jitpack.io' }
     }
 

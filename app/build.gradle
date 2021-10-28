@@ -15,11 +15,7 @@
  */
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-
-repositories {
-    jcenter()
-    google()
-}
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion COMPILE_SDK_VERSION as int

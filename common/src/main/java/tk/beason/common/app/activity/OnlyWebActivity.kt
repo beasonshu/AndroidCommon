@@ -19,8 +19,10 @@ package tk.beason.common.app.activity
 
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.webkit.*
+import androidx.annotation.RequiresApi
 import kotlinx.android.synthetic.main.activity_base_only_web.*
 import tk.beason.common.R
 
@@ -55,7 +57,7 @@ class OnlyWebActivity : tk.beason.common.app.activity.BaseActivity() {
 
         tk.beason.common.utils.WebViewUtils.init(this, web)
         //载入js
-        web.loadUrl(mUrl)
+        mUrl?.let { web.loadUrl(it) }
         //载入js
         web.webViewClient = WebClient()
 
@@ -83,6 +85,7 @@ class OnlyWebActivity : tk.beason.common.app.activity.BaseActivity() {
             return true
         }
 
+        @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
         override fun onReceivedError(view: WebView?, request: WebResourceRequest?, error: WebResourceError?) {
             super.onReceivedError(view, request, error)
             if (request == null || !request.isForMainFrame) {
@@ -91,6 +94,7 @@ class OnlyWebActivity : tk.beason.common.app.activity.BaseActivity() {
             mOnErrorUrl = true
         }
 
+        @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
         override fun onReceivedHttpError(view: WebView?, request: WebResourceRequest?, errorResponse: WebResourceResponse?) {
             super.onReceivedHttpError(view, request, errorResponse)
 

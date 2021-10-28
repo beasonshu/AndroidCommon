@@ -17,14 +17,14 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
-
+apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion COMPILE_SDK_VERSION as int
+    compileSdkVersion 30
 
     defaultConfig {
-        minSdkVersion MIN_SDK_VERSION as int
-        targetSdkVersion TARGET_SDK_VERSION as int
+        minSdkVersion 19
+        targetSdkVersion 30
     }
 
 
@@ -116,6 +116,5 @@ dependencies {
     api "com.squareup.okhttp3:okhttp:4.2.2"
     // JSON 解析工具
     api "com.alibaba:fastjson:1.2.62"
-    api 'tk.beason:pullRefresh:1.0.6'
-    implementation 'com.github.beasonshu:AndroidCommon:1.0.0'
+    api 'com.github.beasonshu:android-PullToRefresh:v1.0.0'
 }
