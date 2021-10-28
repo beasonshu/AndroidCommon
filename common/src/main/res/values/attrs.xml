@@ -37,7 +37,7 @@
     <attr name="text" format="string" />
     <attr name="textSize" format="dimension" />
     <attr name="textColor" format="color" />
-    <attr name="textBackground" format="reference|color" />
+
     <attr name="textAppearance" format="reference" />
     <attr name="textMarginStart" format="dimension" />
     <attr name="textMarginEnd" format="dimension" />
