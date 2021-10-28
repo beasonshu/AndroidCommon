@@ -117,5 +117,5 @@ dependencies {
     // JSON 解析工具
     api "com.alibaba:fastjson:1.2.62"
     api 'tk.beason:pullRefresh:1.0.6'
-    implementation 'com.github.dengshiwei:CalendarComponent:0.0.1'
+    implementation 'com.github.beasonshu:AndroidCommon:1.0.0'
 }
