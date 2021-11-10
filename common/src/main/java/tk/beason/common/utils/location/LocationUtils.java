@@ -12,7 +12,6 @@ import tk.beason.common.utils.log.LogManager;
 
 /**
  * 位置信息获取
- * Created by menghuihui on 17/6/16.
  * modify by beasontk on 2018-06-22
  */
 public class LocationUtils {

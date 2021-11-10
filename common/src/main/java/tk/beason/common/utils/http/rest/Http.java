@@ -27,11 +27,7 @@ import tk.beason.common.utils.http.rest.request.GetRequest;
 import tk.beason.common.utils.http.rest.request.PostRequest;
 
 
-/**
- * Created by Bright.Yu on 2017/2/20.
- * 请求的封装
- */
-@SuppressWarnings("unused")
+
 public class Http {
     private static Http mInstance;
     private Executor mExecutor;

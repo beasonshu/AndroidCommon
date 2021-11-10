@@ -214,7 +214,7 @@ dependencies {
     //implementation group: 'tk.beason', name: 'common', version: '1.0.1'
 // 基础库
     implementation project(':common')
-
+    implementation "com.alibaba:fastjson:1.2.62"
 
 }
 

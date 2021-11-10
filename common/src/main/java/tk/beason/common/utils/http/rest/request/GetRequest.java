@@ -18,12 +18,7 @@ package tk.beason.common.utils.http.rest.request;
 
 import tk.beason.common.utils.http.rest.Method;
 
-/**
- * Created by Bright.Yu on 2017/2/16.
- * Get Request
- */
 
-@SuppressWarnings("unused")
 public class GetRequest extends Request<GetRequest> {
     public GetRequest() {
         super(Method.GET);

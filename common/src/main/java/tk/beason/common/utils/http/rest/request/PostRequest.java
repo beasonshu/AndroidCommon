@@ -23,12 +23,7 @@ import tk.beason.common.utils.http.rest.Method;
 
 import java.io.File;
 
-/**
- * Created by Bright.Yu on 2017/2/16.
- * Post Request
- */
 
-@SuppressWarnings("unused")
 public class PostRequest extends Request<PostRequest> {
 
     public PostRequest() {
