@@ -70,7 +70,13 @@ public class ToastUtils {
         new Handler().post(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(context, text, duration).show();
+                if(mToast == null) {
+                    mToast = Toast.makeText(context, text, duration);
+                } else {
+                    mToast.setText(text);
+                    mToast.setDuration(duration);
+                }
+                mToast.show();
             }
         });
 
