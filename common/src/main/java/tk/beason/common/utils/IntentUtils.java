@@ -22,11 +22,16 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.ContactsContract;
 import android.provider.Settings;
-import androidx.annotation.StringRes;
 import android.text.TextUtils;
 import android.widget.Toast;
+
+import androidx.annotation.StringRes;
+import androidx.core.content.FileProvider;
+
+import java.io.File;
 
 import tk.beason.common.R;
 
@@ -35,6 +40,10 @@ import tk.beason.common.R;
  */
 @SuppressWarnings("unused")
 public class IntentUtils {
+    /**
+     * 当前版本安装次数
+     */
+    private static final String INSTALL_TIMES = "apk_install_times_";
     /**
      * 微信包名
      */
@@ -159,5 +168,33 @@ public class IntentUtils {
         } catch (Exception e) {
             ToastUtils.show(context, R.string.exception_intent_open, Toast.LENGTH_SHORT);
         }
+    }
+
+    /**
+     * 安装 apk
+     * @param mVersionFilePath
+     * @param context
+     */
+    public static void installApk(String mVersionFilePath,Context context) {
+        File apkFile = new File(mVersionFilePath);
+        if (!apkFile.exists()) {
+            return;
+        }
+
+
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Uri photoOutputUri = FileProvider.getUriForFile(
+                    context,
+                    context.getPackageName() + ".fileprovider",
+                    apkFile);
+            //Granting Temporary Permissions to a URI
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            intent.setDataAndType(photoOutputUri, "application/vnd.android.package-archive");
+        } else {
+            intent.setDataAndType(Uri.parse("file://" + apkFile.toString()), "application/vnd.android.package-archive");
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
+        context.startActivity(intent);
     }
 }
