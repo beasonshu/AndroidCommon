@@ -3,27 +3,31 @@
 AndroidCommon是一个项目的基础框架，里面包含了常用的工具类、自定义的控件以及项目的基本功能等
 
 
-# JCenter
-```
-api 'tk.beason:common:1.0.16'
-```
+# How to
+To get a Git project into your build:
+
+Step 1. Add the JitPack repository to your build file
+
+gradle
+Add it in your root build.gradle at the end of repositories:
+
+	allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+Step 2. Add the dependency
+
+	dependencies {
+	        implementation 'com.github.beasonshu:AndroidCommon:v1.0.9'
+	}
 
 
-# 更新记录
-### 1.0.16
-- 增加环境切换 默认存储使用SharePreference replace 序列化
-### 1.0.13
-- 增加环境切换 参见[EnvVariable](https://github.com/twiceyuan/EnvVariable)
-### 1.0.12
-- 解决ssl证书过期或者私有证书
-### 1.0.3
-- 修改验证码倒计时
-### 1.0.2
-- SelectPhotoUtils 增加 Bitmap.CompressFormat 选择
-### 1.0.1
-- ImageUtils 工具类重新配置以及整理
-- SharedPreferencesUtils 增加缓存方法
-- VersionManager 增加清除缓存机制
+# update record
+### 1.0.9
+- fix verified code  countdown issues
+
 
 
 # License
