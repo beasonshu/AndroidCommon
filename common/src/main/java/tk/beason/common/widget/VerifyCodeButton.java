@@ -385,6 +385,7 @@ public class VerifyCodeButton extends FrameLayout implements LifecycleObserver{
      */
 
     public void reset() {
+        setEnabled(true);
         setClickable(true);
         mProgressBar.setVisibility(INVISIBLE);
         mDisplayView.setVisibility(VISIBLE);

@@ -102,7 +102,7 @@ class LoginActivity : tk.beason.noah.modules.base.AppBaseActivity(),
                 }
             }
         })
-
+        sendVerifyCode.setOnClickListener(this)
         login.setOnClickListener(this)
         register.setOnClickListener(this)
         forgotPassword.setOnClickListener(this)
@@ -111,7 +111,9 @@ class LoginActivity : tk.beason.noah.modules.base.AppBaseActivity(),
 
     override fun onClick(v: View) {
         when (v.id) {
-
+            R.id.sendVerifyCode->{
+                sendVerifyCode.startTiming(5)
+            }
             R.id.login -> {
                 //mPresenter.login(mEditAccountView.inputText, mEditPasswordView.inputText)
             }

@@ -1,6 +1,8 @@
 package tk.beason.noah.modules.base
 
 import android.app.Dialog
+import android.os.Parcel
+import android.os.Parcelable
 import android.view.View
 import android.view.ViewGroup
 import tk.beason.common.app.activity.BaseActivity
@@ -12,7 +14,7 @@ import tk.beason.noah.ui.widget.dialog.VersionDialog
  * Created by beasontk on 2018/8/8.
  * App层面的BaseActivity
  */
-abstract class AppBaseActivity : BaseActivity() {
+abstract class AppBaseActivity() : BaseActivity() {
 
     /**
      * 检测升级的Dialog
@@ -47,7 +49,10 @@ abstract class AppBaseActivity : BaseActivity() {
         super.onResume()
 
 
-        if (needShowUpdateVersionDialog() && tk.beason.noah.manager.VersionManager.instance.hasNewVersion(context)) {
+        if (needShowUpdateVersionDialog() && tk.beason.noah.manager.VersionManager.instance.hasNewVersion(
+                context
+            )
+        ) {
             showVersionDialog()
         }
     }
@@ -87,4 +92,5 @@ abstract class AppBaseActivity : BaseActivity() {
         }
         mVersionDialog = null
     }
+
 }

@@ -7,6 +7,7 @@ import tk.beason.common.utils.permission.PermissionDenied
 import tk.beason.common.utils.permission.PermissionGranted
 import tk.beason.common.utils.router.AppRouter
 import tk.beason.noah.constant.Configure
+import tk.beason.noah.modules.account.login.LoginActivity
 import tk.beason.noah.modules.base.AppBaseActivity
 import tk.beason.noah.modules.main.MainActivity
 import tk.beason.noah.modules.sample.main.SampleMainActivity
@@ -87,7 +88,7 @@ class SplashActivity : tk.beason.noah.modules.base.AppBaseActivity(), SplashCont
             }
             SplashPresenter.Target.LOGIN -> {
                 AppRouter.with(this)
-                        .target(SampleMainActivity::class.java)!!
+                        .target(LoginActivity::class.java)!!
                         .finishSelf()!!
                         .start()
             }

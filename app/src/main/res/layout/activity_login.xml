@@ -68,6 +68,7 @@
 
         <tk.beason.common.widget.VerifyCodeButton
             android:id="@+id/sendVerifyCode"
+            app:timingText="@string/verify_code_timing_text"
             style="@style/VerifyCodeButton" />
     </tk.beason.common.widget.edittext.EditTextPro>
 

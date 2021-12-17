@@ -215,6 +215,9 @@ dependencies {
 // 基础库
     implementation project(':common')
     implementation "com.alibaba:fastjson:1.2.62"
-
+    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.appcompat:appcompat:1.4.0'
+    implementation "androidx.recyclerview:recyclerview:1.2.1"
+    implementation 'com.github.beasonshu:android-PullToRefresh:v1.0.0'
 }
 

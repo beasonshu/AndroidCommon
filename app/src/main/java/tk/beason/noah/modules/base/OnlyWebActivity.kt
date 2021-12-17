@@ -56,7 +56,7 @@ class OnlyWebActivity : tk.beason.noah.modules.base.AppBaseActivity() {
 
         WebViewUtils.init(this, web)
         //载入js
-        web.loadUrl(mUrl)
+        mUrl?.let { web.loadUrl(it) }
         //载入js
         web.webViewClient = WebClient()
         // 设置下载监听

@@ -18,7 +18,6 @@ package tk.beason.noah.modules.egg
 
 import android.content.Context
 import tk.beason.noah.R
-import tk.beason.noah.entries.egg.Egg
 import tk.beason.noah.modules.egg.detail.EggAppInfoActivity
 import java.util.*
 

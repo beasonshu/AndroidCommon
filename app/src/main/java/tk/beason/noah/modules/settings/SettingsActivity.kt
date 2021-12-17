@@ -58,16 +58,17 @@ class SettingsActivity : AppBaseActivity(), TopBar.OnSecretListener, View.OnClic
 
     private fun logout() {
         BaseDialog.Builder(this)
-                .setMessage(R.string.ensure_logout)
-                .setMessageGravity(Gravity.CENTER)
-                .setNegativeButton(R.string.cancel, null)
-                .setPositiveButton(R.string.yes){ _, _ ->
-                    AppRouter.with(this)
-                        .target(tk.beason.noah.modules.account.login.LoginActivity::class.java)
-                        .flag(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-                        .finishSelf()
-                        .start()}
-                .show()
+            .setMessage(R.string.ensure_logout)
+            .setMessageGravity(Gravity.CENTER)
+            .setNegativeButton(R.string.cancel, null)
+            .setPositiveButton(R.string.yes) { _, _ ->
+                AppRouter.with(this)
+                    .target(tk.beason.noah.modules.account.login.LoginActivity::class.java)
+                    .flag(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                    .finishSelf()
+                    .start()
+            }
+            .show()
     }
 
 
