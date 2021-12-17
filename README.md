@@ -1,4 +1,4 @@
-# 简介
+# Profile
 
 AndroidCommon是一个项目的基础框架，里面包含了常用的工具类、自定义的控件以及项目的基本功能等
 
@@ -24,7 +24,7 @@ Step 2. Add the dependency
 	}
 
 
-# update record
+# Update Record
 ### 1.0.9
 - fix verified code  countdown issues
 
