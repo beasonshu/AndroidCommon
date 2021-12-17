@@ -47,5 +47,3 @@ Step 2. Add the dependency
     limitations under the License.
 
 
-# 备注
-正式版本使用的时候请把 文件名为 test 和后缀名字为v7 的文件直接删除
