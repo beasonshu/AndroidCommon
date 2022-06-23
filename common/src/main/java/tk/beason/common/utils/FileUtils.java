@@ -5,6 +5,9 @@ import android.os.StatFs;
 import androidx.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
+
+import org.jetbrains.annotations.NotNull;
+
 import tk.beason.common.utils.log.LogManager;
 
 import java.io.File;
@@ -341,5 +344,20 @@ public class FileUtils {
         return result.startsWith(File.separator);
     }
 
-
+    /**
+     * 文件是否存在
+     * @param filePath 文件路径
+     * @return
+     */
+    public static boolean fileIsExists(@NotNull String filePath) {
+        try {
+            File file = new File(filePath);
+            if (!file.exists()) {
+                return false;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
 }
