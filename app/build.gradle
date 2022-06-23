@@ -27,6 +27,7 @@ android {
         targetSdkVersion TARGET_SDK_VERSION as int
         versionCode generateVersionCode() as int
         versionName VERSION_NAME
+        multiDexEnabled true
 
         // 增加一个编译版本的时间
         buildConfigField "long", "RELEASE_TIME", System.currentTimeMillis() + "L"
