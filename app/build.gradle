@@ -19,7 +19,6 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion COMPILE_SDK_VERSION as int
-    buildToolsVersion BUILD_TOOLS_VERSION
 
     defaultConfig {
         // 注意这里只是设置了appId的前缀 在buildTypes里面有设置后缀
@@ -40,9 +39,9 @@ android {
         // 配置默认版本-为开发版本
         buildConfigField "int", "VERSION_TYPE", VERSION_DEV
         buildConfigField "String", "VERSION_DESCRIPTION", "\"开发版本\""
+        resConfigs 'zh'
 
         // 配置语言信息
-        resConfig "zh"
         // NDK 加载lib的文件夹
         ndk {
             abiFilters "arm64-v8a", "armeabi", "armeabi-v7a", "x86", "x86_64"
@@ -183,16 +182,16 @@ android {
         release.setRoot('build-types/release')
     }
 
-    lintOptions {
-        checkReleaseBuilds false
-        abortOnError false
-        // if true, only report errors
-        ignoreWarnings true
-    }
 
     compileOptions {
+        coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
+        ignoreWarnings true
     }
 
     // 包名重命名，加上版本及日期
@@ -214,10 +213,12 @@ dependencies {
     //implementation group: 'tk.beason', name: 'common', version: '1.0.1'
 // 基础库
     implementation project(':common')
-    implementation "com.alibaba:fastjson:1.2.62"
-    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation "com.alibaba:fastjson:1.2.78"
+    implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.4.0'
     implementation "androidx.recyclerview:recyclerview:1.2.1"
     implementation 'com.github.beasonshu:android-PullToRefresh:v1.0.0'
+    // https://mvnrepository.com/artifact/com.android.tools/desugar_jdk_libs
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 }
 

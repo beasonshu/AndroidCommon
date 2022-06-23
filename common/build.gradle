@@ -43,13 +43,14 @@ android {
         release.setRoot('build-types/release')
     }
 
-    lintOptions {
-        checkReleaseBuilds false
-        abortOnError false
-    }
     compileOptions {
+        coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
     }
 
 
@@ -131,4 +132,6 @@ dependencies {
     // JSON 解析工具
     implementation "com.alibaba:fastjson:1.2.62"
     implementation 'com.github.beasonshu:android-PullToRefresh:v1.0.0'
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
+
 }
