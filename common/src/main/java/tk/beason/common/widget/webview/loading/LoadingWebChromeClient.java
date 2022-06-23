@@ -39,7 +39,7 @@ import android.webkit.WebView;
 
 class LoadingWebChromeClient extends WebChromeClient {
     private WebChromeClient mRealWebChromeClient;
-    private LoadingWebView mLoadingWebView;
+    private final LoadingWebView mLoadingWebView;
 
     LoadingWebChromeClient(LoadingWebView webView) {
         mLoadingWebView = webView;
@@ -172,14 +172,6 @@ class LoadingWebChromeClient extends WebChromeClient {
         super.onExceededDatabaseQuota(url, databaseIdentifier, quota, estimatedDatabaseSize, totalQuota, quotaUpdater);
         if (mRealWebChromeClient != null) {
             mRealWebChromeClient.onExceededDatabaseQuota(url, databaseIdentifier, quota, estimatedDatabaseSize, totalQuota, quotaUpdater);
-        }
-    }
-
-    @Override
-    public void onReachedMaxAppCacheSize(long requiredStorage, long quota, WebStorage.QuotaUpdater quotaUpdater) {
-        super.onReachedMaxAppCacheSize(requiredStorage, quota, quotaUpdater);
-        if (mRealWebChromeClient != null) {
-            mRealWebChromeClient.onReachedMaxAppCacheSize(requiredStorage, quota, quotaUpdater);
         }
     }
 
