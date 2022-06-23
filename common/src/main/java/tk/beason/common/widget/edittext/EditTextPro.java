@@ -54,10 +54,9 @@ import tk.beason.common.widget.prompt.IPrompt;
 import tk.beason.common.widget.textview.PromptTextView;
 
 /**
- * Created by Bright.Yu on 2017/2/9.
+ *
  * 加强版本的EditText
  */
-@SuppressWarnings("unused")
 public class EditTextPro extends ViewGroup implements View.OnFocusChangeListener, View.OnClickListener {
     private static final String TAG = "EditTextPro";
     /**

@@ -40,6 +40,7 @@ class OnlyWebActivity : tk.beason.common.app.activity.BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_base_only_web)
+        showLoading("loading",true)
     }
 
     override fun initNecessaryData() {

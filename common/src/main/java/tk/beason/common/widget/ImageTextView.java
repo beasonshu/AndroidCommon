@@ -329,7 +329,7 @@ public class ImageTextView extends View implements IPrompt {
         switch (mImageOrientation) {
             case Orientation.TOP:
             case Orientation.BOTTOM:
-                maxSize = Math.min(getWidth(), size) - DEFAULT_PADDING * 2;
+                maxSize = Math.max(getMeasuredHeight(), size) - DEFAULT_PADDING * 2;
                 mLayout = new StaticLayout(mText, mTextPaint, maxSize, Layout.Alignment.ALIGN_CENTER, 1.0f, 0.0f, true);
                 break;
 

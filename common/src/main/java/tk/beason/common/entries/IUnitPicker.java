@@ -19,7 +19,7 @@ package tk.beason.common.entries;
 import android.content.Context;
 
 /**
- * Created by Bright.Yu on 2016/12/29.
+ *
  * 选中的ISelect
  */
 

@@ -22,7 +22,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 
 /**
- * Created by Bright.Yu on 2016/11/12.
+ *
  * 是否可以变编辑
  */
 
