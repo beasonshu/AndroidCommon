@@ -329,13 +329,12 @@ public class ImageTextView extends View implements IPrompt {
         switch (mImageOrientation) {
             case Orientation.TOP:
             case Orientation.BOTTOM:
-                maxSize = size - 2 * DEFAULT_PADDING;
+                maxSize = Math.min(getWidth(), size) - DEFAULT_PADDING * 2;
                 mLayout = new StaticLayout(mText, mTextPaint, maxSize, Layout.Alignment.ALIGN_CENTER, 1.0f, 0.0f, true);
                 break;
 
             case Orientation.LEFT:
             case Orientation.RIGHT:
-                maxSize = size - getImageWidth() - 2 * DEFAULT_PADDING - mPadding;
                 mLayout = new StaticLayout(mText, mTextPaint, mTextDesireWidth, Layout.Alignment.ALIGN_CENTER, 1.0f, 0.0f, true);
                 break;
         }
@@ -354,7 +353,6 @@ public class ImageTextView extends View implements IPrompt {
                 } else {
                     maxSize = size - 2 * DEFAULT_PADDING;
                     mLayout = new StaticLayout(mText, mTextPaint, maxSize, Layout.Alignment.ALIGN_CENTER, 1.0f, 0.0f, true);
-                    width = size;
                 }
                 break;
 
@@ -366,7 +364,6 @@ public class ImageTextView extends View implements IPrompt {
                 } else {
                     maxSize = size - getImageWidth() - 2 * DEFAULT_PADDING - mPadding;
                     mLayout = new StaticLayout(mText, mTextPaint, maxSize, Layout.Alignment.ALIGN_CENTER, 1.0f, 0.0f, true);
-                    width = size;
                 }
                 break;
         }
